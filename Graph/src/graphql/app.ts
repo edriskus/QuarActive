@@ -4,7 +4,12 @@ import { ApolloServer } from 'apollo-server';
 import { createSchema, contextMiddleware, disposeScopedContainer } from './helpers';
 
 (async () => {
-    await createConnection();
+    console.log(process.env.DATABASE_URL);
+    await createConnection({
+        type: "postgres",
+        url: process.env.DATABASE_URL,
+        entities: ["./src/entities/*.ts"]
+    });
 
     const schema = await createSchema();
     const server = new ApolloServer({
