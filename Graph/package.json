@@ -38,7 +38,7 @@
     "typescript": "^3.8.2"
   },
   "scripts": {
-    "start": "ts-node src/graphql/app.ts",
+    "start": "node_modules/.bin/ts-node src/graphql/app.ts",
     "start:dev": "nodemon 'src/graphql/app.ts' --exec 'ts-node' src/graphql/app.ts -e ts,graphql",
     "heroku-postbuild": "yarn --production"
   },
