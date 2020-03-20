@@ -38,10 +38,8 @@
     "typescript": "^3.8.2"
   },
   "scripts": {
-    "start:dev": "npm run build:dev",
-    "build:dev": "nodemon 'src/graphql/app.ts' --exec 'ts-node' src/graphql/app.ts -e ts,graphql",
-    "db:setup": "ts-node ./tests/setup.ts",
-    "test": "npm run db:setup && jest",
+    "start": "node 'src/graphql/app.ts' --exec 'ts-node' src/graphql/app.ts -e ts,graphql",
+    "start:dev": "nodemon 'src/graphql/app.ts' --exec 'ts-node' src/graphql/app.ts -e ts,graphql",
     "heroku-postbuild": "yarn --production"
   },
   "engines": {
