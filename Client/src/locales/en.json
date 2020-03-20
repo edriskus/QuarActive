@@ -19,5 +19,10 @@
     "title": "Log in",
     "description": "Login description",
     "submit": "Submit"
+  },
+  "gdpr": {
+    "message": "This website uses cookies to ensure you get the best experience on our website",
+    "moreInfo": "More Info",
+    "agree": "Accept"
   }
 }

@@ -7,6 +7,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import Routes from "../Routes/Routes";
 import Header from "../../components/Header/Header";
 import { AuthProvider } from "../../utils/Auth";
+import CookieBar from "../CookieBar/CookieBar";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Router>
             <Header />
             <Routes />
+            <CookieBar />
           </Router>
         </ThemeProvider>
       </ApolloProvider>

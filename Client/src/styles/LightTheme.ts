@@ -7,7 +7,7 @@ export default responsiveFontSizes(
         main: "#4ba486"
       },
       secondary: {
-        main: "#f8e823"
+        main: "#e8ad24"
       }
     }
   })

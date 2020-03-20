@@ -1,12 +1,26 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import Landing from "../Landing/Landing";
 import NotFound from "../NotFound/NotFound";
 import Onboarding from "../Onboarding/Onboarding";
 import Login from "../Login/Login";
+import { useToken } from "../../utils/Auth";
+import Home from "../Home/Home";
 
 export default function Routes() {
-  return (
+  const token = useToken();
+  return !!token ? (
+    <Switch>
+      <Route path="/" exact={true}>
+        <Home />
+      </Route>
+      <Redirect path="/onboarding" to="/" />
+      <Redirect path="/login" to="/" />
+      <Route>
+        <NotFound />
+      </Route>
+    </Switch>
+  ) : (
     <Switch>
       <Route path="/" exact={true}>
         <Landing />
@@ -16,9 +30,6 @@ export default function Routes() {
       </Route>
       <Route path="/login">
         <Login />
-      </Route>
-      <Route path="/" exact={true}>
-        <Landing />
       </Route>
       <Route>
         <NotFound />
