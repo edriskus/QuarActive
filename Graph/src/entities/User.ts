@@ -13,8 +13,8 @@ export class User extends GenericEntity {
     @Index({ unique: true })
     email: string;
 
-    @Field(() => String)
-    @Column()
+    @Field(() => String, { nullable: true })
+    @Column({ nullable: true })
     displayName: string;
 
     @Column({ length: 64 })
