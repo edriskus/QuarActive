@@ -41,7 +41,8 @@
     "start:dev": "npm run build:dev",
     "build:dev": "nodemon 'src/graphql/app.ts' --exec 'ts-node' src/graphql/app.ts -e ts,graphql",
     "db:setup": "ts-node ./tests/setup.ts",
-    "test": "npm run db:setup && jest"
+    "test": "npm run db:setup && jest",
+    "heroku-postbuild": "yarn --production"
   },
   "engines": {
     "node": "10.19.0",
