@@ -5,6 +5,7 @@ import { client } from "../../utils/Apollo";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { BrowserRouter as Router } from "react-router-dom";
 import Routes from "../Routes/Routes";
+import Header from "../../components/Header/Header";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <ThemeProvider theme={LightTheme}>
         <CssBaseline />
         <Router>
+          <Header />
           <Routes />
         </Router>
       </ThemeProvider>
