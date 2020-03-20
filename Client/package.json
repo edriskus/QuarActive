@@ -33,7 +33,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint-fix": "eslint src --ext .ts,.tsx --fix"
+    "lint-fix": "eslint src --ext .ts,.tsx --fix",
+    "push": "aws s3 sync build s3://quaractive --delete --size-only && aws s3 sync build s3://quaractive --delete --exclude \"*\" --include \"index.html\"",
+    "deploy": "yarn build && yarn push"
   },
   "eslintConfig": {
     "plugins": [

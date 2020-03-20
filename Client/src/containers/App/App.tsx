@@ -6,18 +6,21 @@ import { ApolloProvider } from "@apollo/react-hooks";
 import { BrowserRouter as Router } from "react-router-dom";
 import Routes from "../Routes/Routes";
 import Header from "../../components/Header/Header";
+import { AuthProvider } from "../../utils/Auth";
 
 function App() {
   return (
-    <ApolloProvider client={client}>
-      <ThemeProvider theme={LightTheme}>
-        <CssBaseline />
-        <Router>
-          <Header />
-          <Routes />
-        </Router>
-      </ThemeProvider>
-    </ApolloProvider>
+    <AuthProvider>
+      <ApolloProvider client={client}>
+        <ThemeProvider theme={LightTheme}>
+          <CssBaseline />
+          <Router>
+            <Header />
+            <Routes />
+          </Router>
+        </ThemeProvider>
+      </ApolloProvider>
+    </AuthProvider>
   );
 }
 

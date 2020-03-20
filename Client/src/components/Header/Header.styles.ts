@@ -7,5 +7,10 @@ export const useStyles = makeStyles((theme: Theme) => ({
     alignItems: "center",
     flexDirection: "row",
     justifyContent: "space-between"
+  },
+  centered: {
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "row"
   }
 }));

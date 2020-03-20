@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import Landing from "../Landing/Landing";
 import NotFound from "../NotFound/NotFound";
 import Onboarding from "../Onboarding/Onboarding";
+import Login from "../Login/Login";
 
 export default function Routes() {
   return (
@@ -12,6 +13,9 @@ export default function Routes() {
       </Route>
       <Route path="/onboarding">
         <Onboarding />
+      </Route>
+      <Route path="/login">
+        <Login />
       </Route>
       <Route path="/" exact={true}>
         <Landing />

@@ -14,5 +14,10 @@
     "task1Description": "Tell us who you are",
     "task2": "Second Task",
     "task2Description": "Enter your email"
+  },
+  "login": {
+    "title": "Log in",
+    "description": "Login description",
+    "submit": "Submit"
   }
 }
