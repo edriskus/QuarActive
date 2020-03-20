@@ -17,6 +17,7 @@ import { createSchema, contextMiddleware, disposeScopedContainer } from './helpe
         schema,
         debug: false,
         introspection: true,
+        playground: true,
         context: contextMiddleware,
         plugins: [disposeScopedContainer],
     });
