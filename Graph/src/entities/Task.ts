@@ -1,8 +1,9 @@
-import { Entity, Column, Index, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Entity, Column, Index, PrimaryGeneratedColumn, OneToMany, JoinColumn, OneToOne } from 'typeorm';
 import { ObjectType, Field, ID } from 'type-graphql';
 import { GenericEntity } from './GenericEntity';
 import { TaskStatus, Difficulty } from './enums';
 import { UserTaskStatus } from './UserTaskStatus';
+import { Translation } from './Translation';
 
 @Entity()
 @ObjectType()
@@ -11,13 +12,19 @@ export class Task extends GenericEntity {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Field(() => String)
-    @Column()
-    title: string;
+    @Field(() => Translation, { nullable: true })
+    @OneToOne(() => Translation, { nullable: true, lazy: true })
+    @JoinColumn()
+    title: Translation;
 
-    @Field(() => String, { nullable: true })
-    @Column({ nullable: true })
-    description: string;
+    @Field(() => Translation, { nullable: true })
+    @OneToOne(() => Translation, { nullable: true, lazy: true })
+    @JoinColumn()
+    description: Translation;
+
+    @Field(() => Number)
+    @Column({ default: 0 })
+    amount: number;
 
     @Field(() => Difficulty, { defaultValue: 0 })
     @Column({ enum: Difficulty, default: 0 })

@@ -1,13 +1,17 @@
 import { InputType, Field } from "type-graphql";
 import { Difficulty } from "../../entities/enums";
+import { TranslationInput } from "./TranslationInput";
 
 @InputType()
 export class TaskInput {
   @Field()
-  title: string;
+  title: TranslationInput;
 
   @Field()
-  description: string;
+  description: TranslationInput;
+
+  @Field()
+  amount: number;
 
   @Field(() => Difficulty)
   difficulty: Difficulty;

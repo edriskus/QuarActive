@@ -6,6 +6,7 @@ import { Context } from "../types";
 import { UserTaskStatus } from "../../entities/UserTaskStatus";
 import { GraphQLError } from "graphql";
 import { TaskInput } from "../inputs";
+import { Translation } from "../../entities";
 
 @Service()
 @Resolver(() => Task)
@@ -22,8 +23,13 @@ export class TaskResolver {
     @Mutation(() => Task)
     async addTask(@Arg('data') data: TaskInput) {
         const task = new Task();
-        task.title = data.title;
-        task.description = data.description;
+        const title = Translation.create(data.title);
+        await title.save();
+        const description = Translation.create(data.description);
+        await description.save();
+        task.title = title;
+        task.amount = data.amount;
+        task.description = description;
         task.difficulty = data.difficulty;
         return task.save();
     }
