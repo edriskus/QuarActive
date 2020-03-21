@@ -9,7 +9,12 @@ import {
   IconButton,
   CircularProgress
 } from "@material-ui/core";
-import { Task, CheckpointStatus, TaskStatus } from "../../types/Task";
+import {
+  Task,
+  CheckpointStatus,
+  Checkpoint,
+  TaskStatus
+} from "../../types/Task";
 import { useStyles } from "./TaskSteps.styles";
 import { ArrowForward, Share, FavoriteBorder } from "@material-ui/icons";
 import { useLocale, local } from "../../utils/Translation";
@@ -35,7 +40,7 @@ export default function TaskSteps({ task }: Props) {
   );
   const [activeStep, setActiveStep] = useState(lastCompleteStep + 1);
   const { stepperGrid } = useStyles();
-  const step = task.checkpoints[activeStep];
+  const step = task.checkpoints[activeStep] as Checkpoint | undefined;
   const { locale } = useLocale();
   const { t } = useTranslation();
 
@@ -66,7 +71,7 @@ export default function TaskSteps({ task }: Props) {
   );
 
   const [doChangeTask] = useMutation(changeTaskStatus, {
-    update: (cache, data: any) => {
+    update: cache => {
       const cached = cache.readQuery<{ tasks: Task[] }>({ query: getTasks });
       const found = (cached?.tasks ?? []).find(({ id }) => id === task.id);
       if (found) {
@@ -87,7 +92,7 @@ export default function TaskSteps({ task }: Props) {
       doChangeCheckpoint({
         variables: {
           status: CheckpointStatus.done,
-          checkpointId: step.id
+          checkpointId: step?.id
         }
       });
       if (activeStep === task.checkpoints.length - 1) {
@@ -104,7 +109,7 @@ export default function TaskSteps({ task }: Props) {
     doChangeCheckpoint,
     doChangeTask,
     lastCompleteStep,
-    step.id,
+    step,
     task.checkpoints.length,
     task.id
   ]);
