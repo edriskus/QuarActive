@@ -21,6 +21,10 @@ export default responsiveFontSizes(
       h3: {
         fontSize: 32,
         fontWeight: 600
+      },
+      h4: {
+        fontSize: 24,
+        fontWeight: 600
       }
     },
     shape: {

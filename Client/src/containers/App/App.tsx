@@ -1,5 +1,5 @@
 import React from "react";
-import { ThemeProvider, CssBaseline } from "@material-ui/core";
+import { ThemeProvider, CssBaseline, Box } from "@material-ui/core";
 import LightTheme from "../../styles/LightTheme";
 import { client } from "../../utils/Apollo";
 import { ApolloProvider } from "@apollo/react-hooks";
@@ -17,7 +17,9 @@ function App() {
           <CssBaseline />
           <Router>
             <Header />
-            <Routes />
+            <Box paddingBottom={6}>
+              <Routes />
+            </Box>
             <CookieBar />
           </Router>
         </ThemeProvider>

@@ -3,9 +3,14 @@ export interface Auth {
   user: User;
 }
 
+export enum UserType {
+  basic = "basic"
+}
+
 export interface User {
   id: string;
   email: string;
+  type: UserType;
   displayName: string;
   balance?: number;
 }
