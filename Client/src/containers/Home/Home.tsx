@@ -38,7 +38,7 @@ const task: Task = {
 export default function Home() {
   const { t } = useTranslation();
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="md">
       <Box paddingY={3}>
         <Typography align="center" variant="h3" color="primary">
           {t("home.dailyChallenge")}
@@ -52,7 +52,7 @@ export default function Home() {
       </Box>
       <Grid container={true} spacing={2}>
         {[task, task, task, task].map((item, key) => (
-          <Grid item={true} xs={6} key={key}>
+          <Grid item={true} xs={6} sm={4} md={3} key={key}>
             <TaskCard task={item} minimal={true} />
           </Grid>
         ))}

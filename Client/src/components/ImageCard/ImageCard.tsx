@@ -16,12 +16,14 @@ import { useStyles } from "./ImageCard.styles";
 
 interface Props {
   src: string;
+  height?: any;
   overlaid?: boolean;
 }
 
 export default function ImageCard({
   src,
   overlaid,
+  height = 140,
   children
 }: PropsWithChildren<Props>) {
   const imageRef = useRef<HTMLAnchorElement | null>(null);
@@ -59,7 +61,10 @@ export default function ImageCard({
       <CardActionArea ref={imageRef as any}>
         <CardMedia
           image={src}
-          style={{ top: top !== null && !moved ? top : undefined }}
+          style={{
+            top: top !== null && !moved ? top : undefined,
+            height
+          }}
           className={clsx(imageCard, {
             [imageCardFixed]: fixed,
             [imageCardOverlaid]: moved

@@ -1,6 +1,12 @@
 import React, { useState, useCallback } from "react";
 import { Task } from "../../types/Task";
-import { Box, Typography, Grid } from "@material-ui/core";
+import {
+  Box,
+  Typography,
+  Grid,
+  useMediaQuery,
+  useTheme
+} from "@material-ui/core";
 import ImageCard from "../ImageCard/ImageCard";
 import OverCard from "../OverCard/OverCard";
 import StatusBlob from "../StatusBlob/StatusBlob";
@@ -18,9 +24,14 @@ export default function TaskCard({ task, minimal }: Props) {
   const closeOverlaid = useCallback(() => overlaid && setOverlaid(false), [
     overlaid
   ]);
+
+  const theme = useTheme();
+  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
+  const imageHeight = minimal || isSmall ? 140 : 300;
+
   return (
     <Box onClick={openOverlaid}>
-      <ImageCard src={task.cover} overlaid={overlaid}>
+      <ImageCard src={task.cover} overlaid={overlaid} height={imageHeight}>
         <Grid
           container={true}
           spacing={1}

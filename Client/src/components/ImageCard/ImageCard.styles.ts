@@ -3,7 +3,6 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 export const useStyles = makeStyles((theme: Theme) => ({
   card: {},
   imageCard: {
-    height: 140,
     borderRadius: theme.shape.borderRadius,
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,
