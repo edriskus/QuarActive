@@ -21,6 +21,10 @@ export default responsiveFontSizes(
       body1: {
         fontSize: 15
       },
+      h2: {
+        fontSize: 72,
+        fontWeight: 600
+      },
       h3: {
         fontSize: 32,
         fontWeight: 600

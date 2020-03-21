@@ -1,45 +1,85 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Container, Typography, Box, Button } from "@material-ui/core";
+import {
+  Container,
+  Typography,
+  Box,
+  Button,
+  Grid,
+  useTheme,
+  useMediaQuery
+} from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { ReactComponent as LandingIllustration } from "../../illustrations/Landing.svg";
 
 export default function Landing() {
   const { t } = useTranslation();
+
+  const theme = useTheme();
+  const isMd = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="lg">
       <Box
         display="flex"
-        justifyContent="center"
         width="100%"
-        paddingY={4}
-        marginTop={2}
-        paddingX={4}
+        alignItems="center"
+        height={isMd ? "auto" : "80vh"}
       >
-        <LandingIllustration />
-      </Box>
-      <Typography
-        align="center"
-        variant="h3"
-        gutterBottom={true}
-        color="primary"
-      >
-        {t("landing.stuckInQuarantine")}
-      </Typography>
-      <Box display="flex" justifyContent="center" marginTop={4} marginX={3}>
-        <Typography align="center" variant="body1" gutterBottom={true}>
-          {t("landing.storyDescription")}
-        </Typography>
-      </Box>
-      <Box display="flex" justifyContent="center" width="100%" marginTop={6}>
-        <Button
-          variant="contained"
-          color="primary"
-          component={Link}
-          to="/onboarding"
-        >
-          {t("landing.challengeAccepted")}
-        </Button>
+        <Grid container={true}>
+          <Grid item={true} xs={12} md={7}>
+            <Box
+              display="flex"
+              justifyContent="center"
+              width="100%"
+              height={isMd ? 165 : 460}
+              paddingY={4}
+              marginTop={2}
+              paddingX={4}
+            >
+              <LandingIllustration height="100%" width="100%" />
+            </Box>
+          </Grid>
+          <Grid item={true} xs={12} md={5}>
+            <Typography
+              align={isMd ? "center" : "right"}
+              variant={isMd ? "h3" : "h2"}
+              gutterBottom={true}
+              color="primary"
+            >
+              {t("landing.stuckInQuarantine")}
+            </Typography>
+            <Box
+              display="flex"
+              justifyContent={isMd ? "center" : "flex-end"}
+              marginTop={4}
+              marginX={isMd ? 3 : 0}
+            >
+              <Typography
+                align={isMd ? "center" : "right"}
+                variant="body1"
+                gutterBottom={true}
+              >
+                {t("landing.storyDescription")}
+              </Typography>
+            </Box>
+            <Box
+              display="flex"
+              justifyContent={isMd ? "center" : "flex-end"}
+              width="100%"
+              marginTop={6}
+            >
+              <Button
+                variant="contained"
+                color="primary"
+                component={Link}
+                to="/onboarding"
+              >
+                {t("landing.challengeAccepted")}
+              </Button>
+            </Box>
+          </Grid>
+        </Grid>
       </Box>
     </Container>
   );
