@@ -7,14 +7,17 @@ export const client = new ApolloClient({
   request: operation => {
     let token;
     try {
-      token = (JSON.parse(localStorage.getItem(AUTH_KEY) ?? "") as Auth)?.token;
+      const auth = JSON.parse(localStorage.getItem(AUTH_KEY) ?? "") as Auth;
+      token = auth?.emulated ? undefined : auth?.token;
     } catch (e) {
       // Do nothing
     }
+    const headers: any = {};
+    if (token) {
+      headers.Authorization = `Bearer ${token}`;
+    }
     operation.setContext({
-      headers: {
-        authorization: token ? `Bearer ${token}` : undefined
-      }
+      headers
     });
   }
 });

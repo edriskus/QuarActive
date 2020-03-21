@@ -9,11 +9,7 @@ import {
   MenuItem
 } from "@material-ui/core";
 import { useStyles } from "./Header.styles";
-import {
-  VpnKeyOutlined,
-  AccountCircleOutlined,
-  NotificationsNoneOutlined
-} from "@material-ui/icons";
+import { VpnKeyOutlined, AccountCircleOutlined } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useToken, useAuth, useBalance } from "../../utils/Auth";
 import { ReactComponent as ToiletPaper } from "../../illustrations/ToiletPaper.svg";
@@ -59,6 +55,19 @@ export default function Header() {
               LOGO
             </Typography>
             <Box className={classes.centered}>
+              {!!token && !emulated && balance != null && (
+                <>
+                  <Box>
+                    <Typography variant="caption" color="primary">
+                      {balance}
+                    </Typography>
+                  </Box>
+                  <Box padding={0.5} paddingBottom={0}>
+                    <ToiletPaper />
+                  </Box>
+                </>
+              )}
+
               <IconButton
                 color="primary"
                 onClick={handleLocale}
@@ -80,21 +89,6 @@ export default function Header() {
               </Menu>
               {!!token && !emulated && (
                 <>
-                  {balance != null && (
-                    <>
-                      <Box>
-                        <Typography variant="caption" color="primary">
-                          {balance}
-                        </Typography>
-                      </Box>
-                      <Box padding={0.5} paddingBottom={0}>
-                        <ToiletPaper />
-                      </Box>
-                    </>
-                  )}
-                  <IconButton color="primary" className={classes.customButton}>
-                    <NotificationsNoneOutlined />
-                  </IconButton>
                   <IconButton
                     color="primary"
                     onClick={handleClick}

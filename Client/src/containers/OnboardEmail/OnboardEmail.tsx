@@ -51,10 +51,7 @@ export default function OnboardEmail({ type, initialValue, onChange }: Props) {
   );
 
   const handleSkip = useCallback(() => {
-    console.log(type);
-
     if (type) {
-      console.log(type, emulateAuth(type));
       setAuth(emulateAuth(type));
     }
   }, [setAuth, type]);

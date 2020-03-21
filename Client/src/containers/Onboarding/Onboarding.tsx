@@ -35,8 +35,6 @@ export default function Onboarding() {
     (password: string) => {
       setPassword(password);
       const variables = { type, email, password };
-      console.log(variables);
-
       doRegister({
         variables
       });
