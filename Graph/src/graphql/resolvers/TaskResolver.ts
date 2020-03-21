@@ -7,6 +7,7 @@ import { UserTaskStatus } from "../../entities/UserTaskStatus";
 import { GraphQLError } from "graphql";
 import { TaskInput } from "../inputs";
 import { Translation, Checkpoint, User } from "../../entities";
+import { UserCheckpointStatus } from "../../entities/UserCheckpointStatus";
 
 @Service()
 @Resolver(() => Task)
@@ -44,6 +45,23 @@ export class TaskResolver {
             return Checkpoint.create(checkpoint).save();
         }));
         return taskDb;
+    }
+
+    @Authorized()
+    @Mutation(() => String)
+    async removeTask(@Arg('taskId') taskId: string) {
+        const exists = await Task.findOne(taskId);
+        if (exists) {
+            await UserTaskStatus.delete({ taskId });
+            const checkpoints = (await Checkpoint.find({ where: { taskId }})).map(c => c.id);
+            await Promise.all(checkpoints.map(async checkpointId => UserCheckpointStatus.delete({ checkpointId })));
+            await Checkpoint.delete({ taskId });
+            await Task.delete({ id: taskId })
+            // TODO: Remove traits && user types
+            return "Ok";
+        }
+
+        throw new GraphQLError("Not found");
     }
 
     async updateUserBalance(userId: string, amount: number) {
