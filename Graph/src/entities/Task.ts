@@ -47,8 +47,8 @@ export class Task extends GenericEntity {
     @OneToMany(() => Checkpoint, checkpoint => checkpoint.task, { nullable: true, lazy: true })
     checkpoints!: Checkpoint[];
 
-    @OneToMany(() => PersonalityTaskTrait, personalityTrait => personalityTrait.taskId, { lazy: true })
-    personalityTraits: PersonalityTaskTrait[];
+    // @OneToMany(() => PersonalityTaskTrait, personalityTrait => personalityTrait.taskId, { lazy: true })
+    // personalityTraits: PersonalityTaskTrait[];
 
     // @OneToMany(() => UserTypeTask, userType => userType.taskId, { lazy: true })
     // types: UserTypeTask[];
