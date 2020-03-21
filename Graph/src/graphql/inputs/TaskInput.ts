@@ -1,6 +1,7 @@
 import { InputType, Field } from "type-graphql";
 import { Difficulty } from "../../entities/enums";
 import { TranslationInput } from "./TranslationInput";
+import { CheckpointInput } from "./CheckpointInput";
 
 @InputType()
 export class TaskInput {
@@ -9,6 +10,9 @@ export class TaskInput {
 
   @Field()
   description: TranslationInput;
+
+  @Field(() => [CheckpointInput])
+  checkpoints: [CheckpointInput];
 
   @Field()
   amount: number;

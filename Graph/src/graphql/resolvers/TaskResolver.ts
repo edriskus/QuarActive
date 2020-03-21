@@ -6,7 +6,7 @@ import { Context } from "../types";
 import { UserTaskStatus } from "../../entities/UserTaskStatus";
 import { GraphQLError } from "graphql";
 import { TaskInput } from "../inputs";
-import { Translation } from "../../entities";
+import { Translation, Checkpoint, User } from "../../entities";
 
 @Service()
 @Resolver(() => Task)
@@ -15,7 +15,7 @@ export class TaskResolver {
 
     @Query(() => [Task])
     async tasks() {
-        const tasks = await Task.find();
+        const tasks = await Task.find({ relations: ['checkpoints'] });
         return tasks;
     }
 
@@ -31,7 +31,27 @@ export class TaskResolver {
         task.amount = data.amount;
         task.description = description;
         task.difficulty = data.difficulty;
-        return task.save();
+        const taskDb = await task.save();
+        taskDb.checkpoints = await Promise.all(data.checkpoints.map(async checkpoint => {
+            Object.assign(checkpoint, { task: taskDb });
+            const title = Translation.create(data.title);
+            await title.save();
+            const description = Translation.create(data.description);
+            await description.save();
+            checkpoint.title = title;
+            checkpoint.description = description;
+            return Checkpoint.create(checkpoint).save();
+        }));
+        console.log(taskDb.checkpoints);
+        return taskDb;
+    }
+
+    async updateUserBalance(userId: string, amount: number) {
+        const user = await User.findOne(userId);
+        if (user) {
+            user.balance += amount;
+            user.save();
+        }
     }
 
     @Authorized()
@@ -43,6 +63,11 @@ export class TaskResolver {
         }
 
         let taskStatus = await UserTaskStatus.findOne({ where: { userId: context.user.id, taskId: task.id }})
+        
+        if (status === TaskStatus.Done && task.amount > 0) {
+            this.updateUserBalance(context.user.id, task.amount);
+        }
+
         if (taskStatus) {
             taskStatus.status = status;
             await taskStatus.save();

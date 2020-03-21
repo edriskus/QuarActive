@@ -1,4 +1,4 @@
-import { Resolver, Mutation, Arg, Query, Authorized } from 'type-graphql';
+import { Resolver, Mutation, Arg, Query, Authorized, Ctx } from 'type-graphql';
 import { Service } from 'typedi';
 import { User } from '../../entities';
 import sha256 from 'sha256';
@@ -7,7 +7,7 @@ import { GraphQLError } from 'graphql';
 import jwt from 'jsonwebtoken';
 import { config } from '../config';
 import { UserService } from '../../services';
-import { AuthResponse } from '../types';
+import { AuthResponse, Context } from '../types';
 
 @Service()
 @Resolver()
@@ -21,11 +21,12 @@ export class UserResolver {
         return users;
     }
 
-    // @Authorized()
-    // @Query(() => User, { nullable: true })
-    // async getUser(@Arg('id') id: string, @Fields() fields: string[]) {
-    //     return await this.userService.getUserById(id, fields);
-    // }
+    @Authorized()
+    @Query(() => User)
+    async getCurrentUser(@Ctx() context: Context) {
+        const user = await User.findOne(context.user.id);
+        return user;
+    }
 
     @Mutation(() => AuthResponse)
     async register(@Arg('data') data: RegisterInput) {

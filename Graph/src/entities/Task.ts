@@ -4,6 +4,7 @@ import { GenericEntity } from './GenericEntity';
 import { TaskStatus, Difficulty } from './enums';
 import { UserTaskStatus } from './UserTaskStatus';
 import { Translation } from './Translation';
+import { Checkpoint } from './Checkpoint';
 
 @Entity()
 @ObjectType()
@@ -35,4 +36,8 @@ export class Task extends GenericEntity {
 
     @OneToMany(() => UserTaskStatus, userTaskStatus => userTaskStatus.taskId)
     userTaskStatus!: UserTaskStatus[];
+
+    @Field(() => [Checkpoint])
+    @OneToMany(() => Checkpoint, checkpoint => checkpoint.task, { nullable: true, lazy: true })
+    checkpoints!: Checkpoint[];
 }
