@@ -2,6 +2,7 @@
   "common": {
     "skip": "Skip",
     "next": "Next",
+    "finish": "Finish",
     "notNow": "Not now"
   },
   "landing": {
@@ -10,14 +11,18 @@
     "challengeAccepted": "Challenge Accepted"
   },
   "onboarding": {
-    "task1": "First Task",
+    "task1": "1st Task",
     "task1Description": "Tell us who you are",
-    "task2": "Second Task",
-    "task2Description": "Enter your email"
+    "task2": "2nd Task",
+    "task2Description": "Enter your email",
+    "task3": "3rd Task",
+    "task3Description": "It’s secret, but what’s your password?"
   },
   "login": {
     "title": "Log in",
     "description": "Login description",
+    "email": "Email",
+    "password": "Password",
     "submit": "Submit"
   },
   "gdpr": {

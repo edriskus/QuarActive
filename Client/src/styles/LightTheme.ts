@@ -8,6 +8,9 @@ export default responsiveFontSizes(
       },
       secondary: {
         main: "#4ba486"
+      },
+      background: {
+        default: "#fff"
       }
     },
     typography: {
@@ -33,6 +36,9 @@ export default responsiveFontSizes(
     overrides: {
       MuiButton: {
         root: {
+          padding: "13px 26px"
+        },
+        outlined: {
           padding: "13px 26px"
         }
       }

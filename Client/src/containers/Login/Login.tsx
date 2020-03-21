@@ -5,7 +5,8 @@ import {
   Typography,
   Button,
   TextField,
-  CircularProgress
+  CircularProgress,
+  InputAdornment
 } from "@material-ui/core";
 import { useTranslation } from "react-i18next";
 import { useMutation } from "@apollo/react-hooks";
@@ -13,6 +14,8 @@ import { login } from "../../graphql/Auth";
 import { useAuth } from "../../utils/Auth";
 import { Auth } from "../../types/Auth";
 import { handleChange } from "../../utils/Form";
+import { ReactComponent as LandingIllustration } from "../../illustrations/Landing.svg";
+import { AlternateEmail, LockOutlined } from "@material-ui/icons";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -39,19 +42,41 @@ export default function Login() {
 
   return (
     <Container maxWidth="sm">
-      <Box display="flex" justifyContent="center" width="100%" marginTop={2}>
-        <img height="200px" alt={t("login.title")} />
+      <Box
+        display="flex"
+        justifyContent="center"
+        width="100%"
+        paddingY={4}
+        marginTop={2}
+        paddingX={4}
+      >
+        <LandingIllustration />
       </Box>
-      <Typography align="center" variant="h1" gutterBottom={true}>
+      <Typography
+        align="center"
+        variant="h3"
+        gutterBottom={true}
+        color="primary"
+      >
         {t("login.title")}
       </Typography>
-      <Typography align="center" variant="body1" gutterBottom={true}>
-        {t("login.description")}
-      </Typography>
+      <Box display="flex" justifyContent="center" marginTop={4} marginX={3}>
+        <Typography align="center" variant="body1" gutterBottom={true}>
+          {t("login.description")}
+        </Typography>
+      </Box>
       <form onSubmit={handleSubmit}>
         <TextField
           value={email}
           margin="normal"
+          placeholder={t("login.email")}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start" color="textSecondary">
+                <AlternateEmail />
+              </InputAdornment>
+            )
+          }}
           fullWidth={true}
           variant="outlined"
           onChange={handleChange(setEmail)}
@@ -59,6 +84,14 @@ export default function Login() {
         <TextField
           value={password}
           margin="normal"
+          placeholder={t("login.password")}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start" color="textSecondary">
+                <LockOutlined />
+              </InputAdornment>
+            )
+          }}
           fullWidth={true}
           variant="outlined"
           type="password"

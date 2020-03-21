@@ -9,26 +9,26 @@ import {
   Button,
   Grid
 } from "@material-ui/core";
-import { AlternateEmail } from "@material-ui/icons";
+import { LockOutlined } from "@material-ui/icons";
 import { handleChange } from "../../utils/Form";
 
 interface Props {
   initialValue?: string;
-  onChange(email: string): void;
+  onChange(password: string): void;
 }
 
-export default function OnboardEmail({ initialValue, onChange }: Props) {
+export default function OnboardPassword({ initialValue, onChange }: Props) {
   const { t } = useTranslation();
 
-  const [email, setEmail] = useState(initialValue ?? "");
+  const [password, setPassword] = useState(initialValue ?? "");
 
   const handleSubmit = useCallback(
     (event: FormEvent) => {
       event.preventDefault();
       // validate
-      onChange(email);
+      onChange(password);
     },
-    [email, onChange]
+    [onChange, password]
   );
 
   return (
@@ -39,7 +39,7 @@ export default function OnboardEmail({ initialValue, onChange }: Props) {
         gutterBottom={true}
         color="primary"
       >
-        {t("onboarding.task2")}
+        {t("onboarding.task3")}
       </Typography>
       <Box
         display="flex"
@@ -49,45 +49,36 @@ export default function OnboardEmail({ initialValue, onChange }: Props) {
         marginX={3}
       >
         <Typography align="center" variant="body1" gutterBottom={true}>
-          {t("onboarding.task2Description")}
+          {t("onboarding.task3Description")}
         </Typography>
       </Box>
       <form onSubmit={handleSubmit}>
         <TextField
-          value={email}
+          value={password}
           margin="normal"
-          placeholder={t("login.email")}
+          type="password"
+          placeholder={t("login.password")}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start" color="textSecondary">
-                <AlternateEmail />
+                <LockOutlined />
               </InputAdornment>
             )
           }}
           fullWidth={true}
           variant="outlined"
-          onChange={handleChange(setEmail)}
+          onChange={handleChange(setPassword)}
         />
         <Box display="flex" justifyContent="center" width="100%" marginTop={4}>
           <Grid container={true} spacing={3}>
-            <Grid item={true} xs={6}>
+            <Grid item={true} xs={12}>
               <Button
                 type="submit"
                 variant="contained"
                 color="secondary"
                 fullWidth={true}
               >
-                {t("common.next")}
-              </Button>
-            </Grid>
-            <Grid item={true} xs={6}>
-              <Button
-                type="button"
-                variant="outlined"
-                color="primary"
-                fullWidth={true}
-              >
-                {t("common.skip")}
+                {t("common.finish")}
               </Button>
             </Grid>
           </Grid>

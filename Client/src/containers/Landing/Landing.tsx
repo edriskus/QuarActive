@@ -9,7 +9,7 @@ export default function Landing() {
   const task: TaskStatus = TaskStatus.done;
   const { t } = useTranslation();
   return (
-    <Container>
+    <Container maxWidth="md">
       <Box
         display="flex"
         justifyContent="center"
