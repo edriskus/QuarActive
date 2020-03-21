@@ -10,7 +10,6 @@ import {
 } from "@material-ui/core";
 import { useStyles } from "./Header.styles";
 import {
-  AccountCircle,
   VpnKeyOutlined,
   AccountCircleOutlined,
   NotificationsNoneOutlined

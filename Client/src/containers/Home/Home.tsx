@@ -1,8 +1,7 @@
 import React from "react";
 import { TaskStatus, Task, Difficulty } from "../../types/Task";
 import { useTranslation } from "react-i18next";
-import { Container, Typography, Box, Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Container, Typography, Box } from "@material-ui/core";
 import TaskCard from "../../components/TaskCard/TaskCard";
 
 export default function Landing() {

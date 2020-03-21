@@ -1,12 +1,10 @@
 import React from "react";
-import { TaskStatus } from "../../types/Task";
 import { useTranslation } from "react-i18next";
 import { Container, Typography, Box, Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { ReactComponent as LandingIllustration } from "../../illustrations/Landing.svg";
 
 export default function Landing() {
-  const task: TaskStatus = TaskStatus.done;
   const { t } = useTranslation();
   return (
     <Container maxWidth="md">

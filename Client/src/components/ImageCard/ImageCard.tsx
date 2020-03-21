@@ -25,7 +25,13 @@ export default function ImageCard({
   children
 }: PropsWithChildren<Props>) {
   const imageRef = useRef<HTMLAnchorElement | null>(null);
-  const { card, imageCard, imageCardOverlaid, imageCardFixed } = useStyles();
+  const {
+    card,
+    imageCard,
+    imageCardOverlaid,
+    imageCardFixed,
+    cardContent
+  } = useStyles();
   const [fixed, setFixed] = useState(false);
   const [moved, setMoved] = useState(false);
   const [top, setTop] = useState<null | number>(null);
@@ -60,7 +66,7 @@ export default function ImageCard({
           })}
         />
         {fixed && <Box height={140} />}
-        <CardContent>{children}</CardContent>
+        <CardContent className={cardContent}>{children}</CardContent>
       </CardActionArea>
     </Card>
   );

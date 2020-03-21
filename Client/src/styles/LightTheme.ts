@@ -28,6 +28,10 @@ export default responsiveFontSizes(
       h4: {
         fontSize: 24,
         fontWeight: 600
+      },
+      h5: {
+        fontSize: 20,
+        fontWeight: 600
       }
     },
     shape: {
