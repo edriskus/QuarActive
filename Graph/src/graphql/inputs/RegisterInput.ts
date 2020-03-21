@@ -1,5 +1,5 @@
 import { InputType, Field } from "type-graphql";
-import { UserType } from "../../entities/enums";
+import { UserType, PersonalityTraitEnum } from "../../entities/enums";
 
 @InputType()
 export class RegisterInput {
@@ -14,4 +14,7 @@ export class RegisterInput {
 
   @Field(() => UserType)
   type: UserType;
+
+  @Field(() => [PersonalityTraitEnum])
+  personalityTraits: PersonalityTraitEnum[];
 }

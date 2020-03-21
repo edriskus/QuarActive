@@ -39,7 +39,6 @@ export class CheckpointResolver {
 
     @FieldResolver(() => CheckpointStatus)
     async status(@Ctx() context: Context, @Root() checkpoint: Checkpoint) {
-        console.log(checkpoint);
         if (!context?.user?.id) {
             return CheckpointStatus.ToDo;
         }

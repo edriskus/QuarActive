@@ -24,7 +24,7 @@ export class TaskResolver {
     async addTask(@Arg('data') data: TaskInput) {
         const task = new Task();
         const title = Translation.create(data.title);
-        await title.save();
+        await title.save(); 
         const description = Translation.create(data.description);
         await description.save();
         task.title = title;
@@ -42,7 +42,6 @@ export class TaskResolver {
             checkpoint.description = description;
             return Checkpoint.create(checkpoint).save();
         }));
-        console.log(taskDb.checkpoints);
         return taskDb;
     }
 
