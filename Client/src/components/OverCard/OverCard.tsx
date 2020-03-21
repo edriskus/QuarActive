@@ -30,7 +30,6 @@ export default function OverCard({ task, open, onClose }: Props) {
                 container={true}
                 spacing={1}
                 justify="space-between"
-                alignItems="center"
                 wrap="nowrap"
               >
                 <Grid item={true} xs="auto">
@@ -45,7 +44,7 @@ export default function OverCard({ task, open, onClose }: Props) {
                     size={"120px"}
                     placementX="right"
                     placementY="top"
-                    margin={-5}
+                    margin={-4}
                   >
                     <Typography variant="button" color="inherit">
                       {task.difficulty}
