@@ -5,3 +5,4 @@ export * from './Translation';
 export * from './UserTaskStatus';
 export * from './Checkpoint';
 export * from './PersonalityTrait';
+export * from './UserTypeTask';

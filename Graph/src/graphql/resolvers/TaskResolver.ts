@@ -31,12 +31,13 @@ export class TaskResolver {
         task.amount = data.amount;
         task.description = description;
         task.difficulty = data.difficulty;
+        task.cover = data.cover;
         const taskDb = await task.save();
         taskDb.checkpoints = await Promise.all(data.checkpoints.map(async checkpoint => {
             Object.assign(checkpoint, { task: taskDb });
-            const title = Translation.create(data.title);
+            const title = Translation.create(checkpoint.title);
             await title.save();
-            const description = Translation.create(data.description);
+            const description = Translation.create(checkpoint.description);
             await description.save();
             checkpoint.title = title;
             checkpoint.description = description;

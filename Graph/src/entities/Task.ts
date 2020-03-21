@@ -5,6 +5,8 @@ import { TaskStatus, Difficulty } from './enums';
 import { UserTaskStatus } from './UserTaskStatus';
 import { Translation } from './Translation';
 import { Checkpoint } from './Checkpoint';
+import { PersonalityTaskTrait } from './PersonalityTaskTrait';
+import { UserTypeTask } from './UserTypeTask';
 
 @Entity()
 @ObjectType()
@@ -27,6 +29,10 @@ export class Task extends GenericEntity {
     @Column({ default: 0 })
     amount: number;
 
+    @Field(() => String, { nullable: true })
+    @Column({ nullable: true })
+    cover: string;
+
     @Field(() => Difficulty, { defaultValue: 0 })
     @Column({ enum: Difficulty, default: 0 })
     difficulty: Difficulty;
@@ -40,4 +46,10 @@ export class Task extends GenericEntity {
     @Field(() => [Checkpoint])
     @OneToMany(() => Checkpoint, checkpoint => checkpoint.task, { nullable: true, lazy: true })
     checkpoints!: Checkpoint[];
+
+    @OneToMany(() => PersonalityTaskTrait, personalityTrait => personalityTrait.taskId, { lazy: true })
+    personalityTraits: PersonalityTaskTrait[];
+
+    // @OneToMany(() => UserTypeTask, userType => userType.taskId, { lazy: true })
+    // types: UserTypeTask[];
 }

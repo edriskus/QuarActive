@@ -17,6 +17,9 @@ export class TaskInput {
   @Field()
   amount: number;
 
+  @Field()
+  cover: string;
+
   @Field(() => Difficulty)
   difficulty: Difficulty;
 }

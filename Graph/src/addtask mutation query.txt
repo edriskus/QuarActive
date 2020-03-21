@@ -43,7 +43,6 @@ mutation {
         lt
         en
       }
-      difficulty
       status
     }
   }
