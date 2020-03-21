@@ -18,6 +18,7 @@ export enum Difficulty {
 export interface Task {
   id: string;
   title: string;
+  cover: string;
   description: string; // In markdown
   difficulty: Difficulty;
   checkpoints: Checkpoint[];

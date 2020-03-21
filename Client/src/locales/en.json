@@ -25,6 +25,9 @@
     "password": "Password",
     "submit": "Submit"
   },
+  "home": {
+    "dailyChallenge": "What’s your challenge for today?"
+  },
   "gdpr": {
     "message": "This website uses cookies to ensure you get the best experience on our website",
     "moreInfo": "More Info",

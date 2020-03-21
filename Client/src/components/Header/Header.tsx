@@ -9,9 +9,15 @@ import {
   MenuItem
 } from "@material-ui/core";
 import { useStyles } from "./Header.styles";
-import { AccountCircle, VpnKeyOutlined } from "@material-ui/icons";
+import {
+  AccountCircle,
+  VpnKeyOutlined,
+  AccountCircleOutlined,
+  NotificationsNoneOutlined
+} from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useToken, useAuth, useBalance } from "../../utils/Auth";
+import { ReactComponent as ToiletPaper } from "../../illustrations/ToiletPaper.svg";
 
 export default function Header() {
   const classes = useStyles();
@@ -44,15 +50,28 @@ export default function Header() {
               {!!token && (
                 <>
                   {balance != null && (
-                    <Typography variant="button">{balance}</Typography>
+                    <>
+                      <Box>
+                        <Typography variant="caption" color="primary">
+                          {balance}
+                        </Typography>
+                      </Box>
+                      <Box padding={0.5} paddingBottom={0}>
+                        <ToiletPaper />
+                      </Box>
+                    </>
                   )}
+                  <IconButton color="primary" className={classes.customButton}>
+                    <NotificationsNoneOutlined />
+                  </IconButton>
                   <IconButton
-                    color="secondary"
+                    color="primary"
                     onClick={handleClick}
                     aria-controls="profile-menu"
                     aria-haspopup="true"
+                    className={classes.customButton}
                   >
-                    <AccountCircle />
+                    <AccountCircleOutlined />
                   </IconButton>
                   <Menu
                     id="profile-menu"

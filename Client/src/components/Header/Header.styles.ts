@@ -12,5 +12,8 @@ export const useStyles = makeStyles((theme: Theme) => ({
     display: "flex",
     alignItems: "center",
     flexDirection: "row"
+  },
+  customButton: {
+    padding: theme.spacing(0.5)
   }
 }));
