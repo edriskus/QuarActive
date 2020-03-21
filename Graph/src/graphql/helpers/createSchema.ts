@@ -5,6 +5,7 @@ import {
     UserResolver
 } from '../resolvers';
 import { Context } from '../types';
+import { User } from '../../entities';
 
 export const createSchema = () =>
     buildSchema({
@@ -13,12 +14,5 @@ export const createSchema = () =>
         ],
         container: ({ context }: ResolverData<Context>) =>
             Container.of(context.requestId),
-        authChecker: ({ context }) => {
-            const user = getUserFromToken(context.authorization);
-            if (!user) {
-                return false;
-            }
-            context.user = user;
-            return true;
-        },
+        authChecker: ({ context }) =>  context.user ? true : false,
     });
