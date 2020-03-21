@@ -9,6 +9,8 @@ export const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: "rgba(0,0,0,0)",
     left: 0,
     top: 0,
+    overflow: "auto",
+    "-webkit-overflow-scrolling": "touch",
     zIndex: theme.zIndex.appBar + 1
   },
   overlay: {
@@ -29,9 +31,11 @@ export const useStyles = makeStyles((theme: Theme) => ({
     zIndex: 1,
     position: "relative",
     minHeight: height,
+    height: "auto",
     width: "100vw",
     borderBottomLeftRadius: 0,
-    borderBottomRightRadius: 0
+    borderBottomRightRadius: 0,
+    paddingBottom: 100
   },
   cardContent: {
     display: "flex",

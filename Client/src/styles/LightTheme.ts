@@ -32,6 +32,10 @@ export default responsiveFontSizes(
       h5: {
         fontSize: 20,
         fontWeight: 600
+      },
+      h6: {
+        fontSize: 14,
+        fontWeight: 600
       }
     },
     shape: {
@@ -44,6 +48,16 @@ export default responsiveFontSizes(
         },
         outlined: {
           padding: "13px 26px"
+        }
+      },
+      MuiStepper: {
+        root: {
+          backgroundColor: "rgba(0,0,0,0)"
+        }
+      },
+      MuiStepLabel: {
+        labelContainer: {
+          display: "none"
         }
       }
     }

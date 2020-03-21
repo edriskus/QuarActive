@@ -26,7 +26,8 @@
     "submit": "Submit"
   },
   "home": {
-    "dailyChallenge": "What’s your challenge for today?"
+    "dailyChallenge": "What’s your challenge for today?",
+    "moreChallenges": "Ready for some more?"
   },
   "gdpr": {
     "message": "This website uses cookies to ensure you get the best experience on our website",

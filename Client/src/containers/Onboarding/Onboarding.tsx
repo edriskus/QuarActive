@@ -3,7 +3,6 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import OnboardEmail from "../OnboardEmail/OnboardEmail";
 import OnboardPersona from "../OnboardPersona/OnboardPersona";
 import { Container, Stepper, Step, StepLabel } from "@material-ui/core";
-import { useStyles } from "./Onboarding.styles";
 import { UserType, Auth } from "../../types/Auth";
 import OnboardPassword from "../OnboardPassword/OnboardPassword";
 import { useMutation } from "@apollo/react-hooks";
@@ -11,7 +10,6 @@ import { useAuth } from "../../utils/Auth";
 import { register } from "../../graphql/Auth";
 
 export default function Onboarding() {
-  const classes = useStyles();
   const [type, setType] = useState<UserType | undefined>();
   const [email, setEmail] = useState<string | undefined>();
   const [password, setPassword] = useState<string | undefined>();
@@ -53,11 +51,7 @@ export default function Onboarding() {
   return (
     <>
       <Container maxWidth="xs">
-        <Stepper
-          activeStep={activeStep}
-          className={classes.stepper}
-          alternativeLabel={true}
-        >
+        <Stepper activeStep={activeStep} alternativeLabel={true}>
           <Step key={0} onClick={goToType}>
             <StepLabel> </StepLabel>
           </Step>
