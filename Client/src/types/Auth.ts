@@ -4,7 +4,9 @@ export interface Auth {
 }
 
 export enum UserType {
-  basic = "basic"
+  Teen = "Teen",
+  Young = "Young",
+  Family = "Family"
 }
 
 export interface User {

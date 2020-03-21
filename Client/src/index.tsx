@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./containers/App/App";
 import * as serviceWorker from "./serviceWorker";
 import "./utils/Translation";
+import "./styles/overrides.css";
 
 ReactDOM.render(<App />, document.getElementById("root"));
 

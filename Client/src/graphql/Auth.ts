@@ -9,15 +9,21 @@ export const login = gql`
         email
         displayName
         balance
+        type
       }
     }
   }
 `;
 
 export const register = gql`
-  mutation register($email: String!, $password: String!) {
+  mutation register($email: String!, $password: String!, $type: UserType!) {
     register(
-      data: { email: $email, password: $password, displayName: "TEST" }
+      data: {
+        email: $email
+        password: $password
+        type: $type
+        displayName: "TEST"
+      }
     ) {
       token
       user {
@@ -25,6 +31,7 @@ export const register = gql`
         email
         displayName
         balance
+        type
       }
     }
   }

@@ -9,13 +9,13 @@ export const personas: Persona[] = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.",
     illustration: Teenager,
-    type: UserType.basic
+    type: UserType.Teen
   },
   {
     title: "Adult",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.",
     illustration: Adult,
-    type: UserType.basic
+    type: UserType.Young
   }
 ];
