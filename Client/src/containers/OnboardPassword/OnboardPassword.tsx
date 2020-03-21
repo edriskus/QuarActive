@@ -7,29 +7,53 @@ import {
   TextField,
   InputAdornment,
   Button,
-  Grid
+  Grid,
+  CircularProgress
 } from "@material-ui/core";
 import { LockOutlined } from "@material-ui/icons";
-import { handleChange } from "../../utils/Form";
+import { handleChange, findError } from "../../utils/Form";
+import GraphErrors from "../../components/GraphErrors/GraphErrors";
+import { ApolloError } from "apollo-boost";
+import * as yup from "yup";
 
 interface Props {
   initialValue?: string;
+  loading?: boolean;
+  error?: ApolloError;
   onChange(password: string): void;
 }
 
-export default function OnboardPassword({ initialValue, onChange }: Props) {
+const schema = yup.object().shape({
+  password: yup.string().required()
+});
+
+export default function OnboardPassword({
+  initialValue,
+  onChange,
+  loading,
+  error
+}: Props) {
   const { t } = useTranslation();
 
   const [password, setPassword] = useState(initialValue ?? "");
+  const [errors, setErrors] = useState<yup.ValidationError[]>([]);
 
   const handleSubmit = useCallback(
     (event: FormEvent) => {
       event.preventDefault();
-      // validate
-      onChange(password);
+      schema
+        .validate({ password }, { abortEarly: false })
+        .then(() => {
+          onChange(password);
+        })
+        .catch(function(err) {
+          setErrors(err.inner);
+        });
     },
     [onChange, password]
   );
+
+  const passwordError = findError(errors, "password")?.message;
 
   return (
     <Container maxWidth="sm">
@@ -56,6 +80,8 @@ export default function OnboardPassword({ initialValue, onChange }: Props) {
         <TextField
           value={password}
           margin="normal"
+          error={!!passwordError}
+          helperText={passwordError}
           type="password"
           placeholder={t("login.password")}
           InputProps={{
@@ -72,14 +98,21 @@ export default function OnboardPassword({ initialValue, onChange }: Props) {
         <Box display="flex" justifyContent="center" width="100%" marginTop={4}>
           <Grid container={true} spacing={3}>
             <Grid item={true} xs={12}>
-              <Button
-                type="submit"
-                variant="contained"
-                color="secondary"
-                fullWidth={true}
-              >
-                {t("common.finish")}
-              </Button>
+              <GraphErrors error={error} />
+              <Box display="flex" justifyContent="center" width="100%">
+                {loading ? (
+                  <CircularProgress />
+                ) : (
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="secondary"
+                    fullWidth={true}
+                  >
+                    {t("common.finish")}
+                  </Button>
+                )}
+              </Box>
             </Grid>
           </Grid>
         </Box>

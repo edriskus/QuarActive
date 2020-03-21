@@ -4,14 +4,18 @@ import OnboardEmail from "../OnboardEmail/OnboardEmail";
 import OnboardPersona from "../OnboardPersona/OnboardPersona";
 import { Container, Stepper, Step, StepLabel } from "@material-ui/core";
 import { useStyles } from "./Onboarding.styles";
-import { UserType } from "../../types/Auth";
+import { UserType, Auth } from "../../types/Auth";
 import OnboardPassword from "../OnboardPassword/OnboardPassword";
+import { useMutation } from "@apollo/react-hooks";
+import { useAuth } from "../../utils/Auth";
+import { register } from "../../graphql/Auth";
 
 export default function Onboarding() {
   const classes = useStyles();
   const [type, setType] = useState<UserType | undefined>();
   const [email, setEmail] = useState<string | undefined>();
   const [password, setPassword] = useState<string | undefined>();
+  const { setAuth } = useAuth();
 
   const activeStep = !type ? 0 : !email ? 1 : 2;
 
@@ -23,10 +27,24 @@ export default function Onboarding() {
     setEmail(email);
   }, []);
 
-  const handlePassword = useCallback((password: string) => {
-    setPassword(password);
-    // Do register
-  }, []);
+  const [doRegister, { loading, error }] = useMutation(register, {
+    onCompleted: ({ register }: { register: Auth }) => {
+      setAuth(register);
+    }
+  });
+
+  const handlePassword = useCallback(
+    (password: string) => {
+      setPassword(password);
+      const variables = { type, email, password };
+      console.log(variables);
+
+      doRegister({
+        variables
+      });
+    },
+    [doRegister, email, type]
+  );
 
   const goToType = useCallback(() => setType(undefined), []);
 
@@ -67,7 +85,12 @@ export default function Onboarding() {
         </Route>
         {!email && <Redirect to="/onboarding/email" />}
         <Route path="/onboarding/password" exact={true}>
-          <OnboardPassword initialValue={password} onChange={handlePassword} />
+          <OnboardPassword
+            initialValue={password}
+            onChange={handlePassword}
+            loading={loading}
+            error={error}
+          />
         </Route>
         <Redirect path="/onboarding" exact={true} to="/onboarding/persona" />
       </Switch>

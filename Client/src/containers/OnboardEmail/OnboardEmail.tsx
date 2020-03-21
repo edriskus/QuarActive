@@ -10,26 +10,43 @@ import {
   Grid
 } from "@material-ui/core";
 import { AlternateEmail } from "@material-ui/icons";
-import { handleChange } from "../../utils/Form";
+import { handleChange, findError } from "../../utils/Form";
+import * as yup from "yup";
 
 interface Props {
   initialValue?: string;
   onChange(email: string): void;
 }
 
+const schema = yup.object().shape({
+  email: yup
+    .string()
+    .email()
+    .required()
+});
+
 export default function OnboardEmail({ initialValue, onChange }: Props) {
   const { t } = useTranslation();
 
   const [email, setEmail] = useState(initialValue ?? "");
+  const [errors, setErrors] = useState<yup.ValidationError[]>([]);
 
   const handleSubmit = useCallback(
     (event: FormEvent) => {
       event.preventDefault();
-      // validate
-      onChange(email);
+      schema
+        .validate({ email }, { abortEarly: false })
+        .then(() => {
+          onChange(email);
+        })
+        .catch(function(err) {
+          setErrors(err.inner);
+        });
     },
     [email, onChange]
   );
+
+  const emailError = findError(errors, "email")?.message;
 
   return (
     <Container maxWidth="sm">
@@ -56,6 +73,8 @@ export default function OnboardEmail({ initialValue, onChange }: Props) {
         <TextField
           value={email}
           margin="normal"
+          error={!!emailError}
+          helperText={emailError}
           placeholder={t("login.email")}
           InputProps={{
             startAdornment: (

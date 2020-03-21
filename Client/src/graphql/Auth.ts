@@ -13,3 +13,19 @@ export const login = gql`
     }
   }
 `;
+
+export const register = gql`
+  mutation register($email: String!, $password: String!) {
+    register(
+      data: { email: $email, password: $password, displayName: "TEST" }
+    ) {
+      token
+      user {
+        id
+        email
+        displayName
+        balance
+      }
+    }
+  }
+`;

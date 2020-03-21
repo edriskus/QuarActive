@@ -1,4 +1,4 @@
-import React, { useCallback, FormEvent, useState } from "react";
+import React, { useCallback, FormEvent, useState, useEffect } from "react";
 import {
   Container,
   Box,
@@ -13,18 +13,33 @@ import { useMutation } from "@apollo/react-hooks";
 import { login } from "../../graphql/Auth";
 import { useAuth } from "../../utils/Auth";
 import { Auth } from "../../types/Auth";
-import { handleChange } from "../../utils/Form";
+import { handleChange, findError } from "../../utils/Form";
 import { ReactComponent as LandingIllustration } from "../../illustrations/Landing.svg";
 import { AlternateEmail, LockOutlined } from "@material-ui/icons";
+import * as yup from "yup";
+import GraphErrors from "../../components/GraphErrors/GraphErrors";
+
+const schema = yup.object().shape({
+  email: yup
+    .string()
+    .email()
+    .required(),
+  password: yup.string().required()
+});
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState<yup.ValidationError[]>([]);
 
   const { setAuth } = useAuth();
   const { t } = useTranslation();
 
-  const [doLogin, { loading }] = useMutation(login, {
+  useEffect(() => {
+    setErrors([]);
+  }, [email, password]);
+
+  const [doLogin, { loading, error }] = useMutation(login, {
     onCompleted: ({ login }: { login: Auth }) => {
       setAuth(login);
     }
@@ -33,12 +48,23 @@ export default function Login() {
   const handleSubmit = useCallback(
     (event: FormEvent) => {
       event.preventDefault();
-      doLogin({
-        variables: { email, password }
-      });
+      const variables = { email, password };
+      schema
+        .validate(variables, { abortEarly: false })
+        .then(() => {
+          doLogin({
+            variables
+          });
+        })
+        .catch(function(err) {
+          setErrors(err.inner);
+        });
     },
     [doLogin, email, password]
   );
+
+  const emailError = findError(errors, "email")?.message;
+  const passwordError = findError(errors, "password")?.message;
 
   return (
     <Container maxWidth="sm">
@@ -69,6 +95,8 @@ export default function Login() {
         <TextField
           value={email}
           margin="normal"
+          error={!!emailError}
+          helperText={emailError}
           placeholder={t("login.email")}
           InputProps={{
             startAdornment: (
@@ -84,6 +112,8 @@ export default function Login() {
         <TextField
           value={password}
           margin="normal"
+          error={!!passwordError}
+          helperText={passwordError}
           placeholder={t("login.password")}
           InputProps={{
             startAdornment: (
@@ -97,6 +127,7 @@ export default function Login() {
           type="password"
           onChange={handleChange(setPassword)}
         />
+        <GraphErrors error={error} />
         <Box display="flex" justifyContent="center" width="100%" marginTop={2}>
           {loading ? (
             <CircularProgress />
