@@ -1,20 +1,21 @@
 import { TranslatedString } from "./Translation";
 
 export enum TaskStatus {
-  inProgress = "inProgress",
-  done = "done"
+  toDo = "ToDo",
+  inProgress = "InProgress",
+  done = "Done"
 }
 
 export enum CheckpointStatus {
-  toDo = "toDo",
-  inProgress = "inProgress",
-  done = "done"
+  toDo = "ToDo",
+  inProgress = "InProgress",
+  done = "Done"
 }
 
 export enum Difficulty {
-  easy = "easy",
-  medium = "medium",
-  hard = "hard"
+  easy = "Easy",
+  medium = "Medium",
+  hard = "Hard"
 }
 
 export interface Task {
@@ -24,7 +25,7 @@ export interface Task {
   description: TranslatedString; // In markdown
   difficulty: Difficulty;
   checkpoints: Checkpoint[];
-  status: TaskStatus;
+  status?: TaskStatus;
 }
 
 export interface Checkpoint {

@@ -36,3 +36,15 @@ export const register = gql`
     }
   }
 `;
+
+export const getCurrentUser = gql`
+  query getCurrentUser {
+    getCurrentUser {
+      id
+      email
+      displayName
+      balance
+      type
+    }
+  }
+`;

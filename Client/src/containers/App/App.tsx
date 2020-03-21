@@ -13,8 +13,8 @@ import { LocaleProvider } from "../../utils/Translation";
 function App() {
   return (
     <LocaleProvider>
-      <AuthProvider>
-        <ApolloProvider client={client}>
+      <ApolloProvider client={client}>
+        <AuthProvider>
           <ThemeProvider theme={LightTheme}>
             <CssBaseline />
             <Router>
@@ -25,8 +25,8 @@ function App() {
               <CookieBar />
             </Router>
           </ThemeProvider>
-        </ApolloProvider>
-      </AuthProvider>
+        </AuthProvider>
+      </ApolloProvider>
     </LocaleProvider>
   );
 }

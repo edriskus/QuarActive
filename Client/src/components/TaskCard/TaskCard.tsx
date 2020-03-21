@@ -12,7 +12,7 @@ import OverCard from "../OverCard/OverCard";
 import StatusBlob from "../StatusBlob/StatusBlob";
 import OverDialog from "../OverDialog/OverDialog";
 import { useLocale, local } from "../../utils/Translation";
-import { useTranslation } from "react-i18next";
+import Difficulty from "../Difficulty/Difficulty";
 
 interface Props {
   task: Task;
@@ -20,7 +20,6 @@ interface Props {
 }
 
 export default function TaskCard({ task, minimal }: Props) {
-  const { t } = useTranslation();
   const [overlaid, setOverlaid] = useState(false);
   const openOverlaid = useCallback(() => !overlaid && setOverlaid(true), [
     overlaid
@@ -73,12 +72,7 @@ export default function TaskCard({ task, minimal }: Props) {
                 margin={minimal ? -1 : -3}
                 padding={minimal ? 0.5 : 2}
               >
-                <Typography
-                  variant={minimal ? "overline" : "button"}
-                  color="inherit"
-                >
-                  {t(`difficulty.${task.difficulty}`)}
-                </Typography>
+                <Difficulty difficulty={task.difficulty} status={task.status} />
               </StatusBlob>
             </Box>
           </Grid>

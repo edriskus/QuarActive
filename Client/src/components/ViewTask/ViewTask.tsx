@@ -1,11 +1,17 @@
 import React from "react";
-import { Task } from "../../types/Task";
-import { Typography, Hidden, Box } from "@material-ui/core";
+import { Task, CheckpointStatus, TaskStatus } from "../../types/Task";
+import {
+  Typography,
+  Hidden,
+  Box,
+  useTheme,
+  useMediaQuery
+} from "@material-ui/core";
 import TaskActions from "../TaskActions/TaskActions";
 import StatusBlob from "../StatusBlob/StatusBlob";
 import TaskSteps from "../TaskSteps/TaskSteps";
 import { useLocale, local } from "../../utils/Translation";
-import { useTranslation } from "react-i18next";
+import Difficulty from "../Difficulty/Difficulty";
 
 interface Props {
   task: Task;
@@ -14,11 +20,20 @@ interface Props {
 
 export default function ViewTask({ task, onClose }: Props) {
   const { locale } = useLocale();
-  const { t } = useTranslation();
   const title = local(task.title, locale);
+
+  const theme = useTheme();
+  const isMd = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const showDescription =
+    task.status !== TaskStatus.done &&
+    task.checkpoints[(task.checkpoints.length || 1) - 1]?.status !==
+      CheckpointStatus.done;
   return (
     <>
-      <TaskActions onClose={onClose} />
+      <Box position={isMd ? "relative" : "fixed"}>
+        <TaskActions onClose={onClose} />
+      </Box>
       <Hidden smDown={true}>
         <Box display="flex" justifyContent="center" width="100%">
           <img src={task.cover} height={250} alt={title} />
@@ -27,7 +42,11 @@ export default function ViewTask({ task, onClose }: Props) {
       <Typography variant="h3" color="primary" gutterBottom={true}>
         {title}
       </Typography>
-      <Typography variant="body1">{local(task.description, locale)}</Typography>
+      {showDescription && (
+        <Typography variant="body1">
+          {local(task.description, locale)}
+        </Typography>
+      )}
       <Box position="absolute" top={0} right={0}>
         <StatusBlob
           size={"120px"}
@@ -35,9 +54,7 @@ export default function ViewTask({ task, onClose }: Props) {
           placementY="top"
           margin={-4}
         >
-          <Typography variant="button" color="inherit">
-            {t(`difficulty.${task.difficulty}`)}
-          </Typography>
+          <Difficulty difficulty={task.difficulty} status={task.status} />
         </StatusBlob>
       </Box>
       <TaskSteps task={task} />

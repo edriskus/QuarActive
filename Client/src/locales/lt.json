@@ -38,5 +38,9 @@
     "easy": "lengvas",
     "medium": "vidutinis",
     "hard": "sunkus"
+  },
+  "task": {
+    "congratsYouReceived": "Puiku! Tu gavai",
+    "didYouLike": "Ar patiko šis iššūkis?"
   }
 }

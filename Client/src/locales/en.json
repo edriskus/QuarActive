@@ -38,5 +38,9 @@
     "easy": "easy",
     "medium": "medium",
     "hard": "hard"
+  },
+  "task": {
+    "congratsYouReceived": "Congrats! You received",
+    "didYouLike": "Did you like this challenge?"
   }
 }

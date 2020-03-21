@@ -1,7 +1,9 @@
 import React, { useContext, useEffect } from "react";
 import { createContext, FC, useState } from "react";
-import { AuthBundle, Auth, UserType } from "../types/Auth";
+import { AuthBundle, Auth, UserType, User } from "../types/Auth";
 import { useStorage } from "./Storage";
+import { getCurrentUser } from "../graphql/Auth";
+import { useLazyQuery } from "@apollo/react-hooks";
 
 export const AUTH_KEY = "QuarActive--Auth";
 
@@ -13,6 +15,12 @@ const AuthContext = createContext<AuthBundle>({
 export const AuthProvider: FC = ({ children }) => {
   const [getLocal, setLocal] = useStorage<Auth | undefined>(AUTH_KEY);
   const [auth, setAuth] = useState<Auth | undefined>(getLocal() ?? undefined);
+  const [doGetUser, { data: userData }] = useLazyQuery<{
+    getCurrentUser: User;
+  }>(getCurrentUser, {
+    fetchPolicy: "network-only"
+  });
+
   const bundle: AuthBundle = {
     setAuth: (auth: Auth) => setAuth(auth),
     clearAuth: () => setAuth(undefined),
@@ -23,6 +31,23 @@ export const AuthProvider: FC = ({ children }) => {
     setLocal(auth);
     // eslint-disable-next-line
   }, [auth]);
+
+  useEffect(() => {
+    if (userData?.getCurrentUser && auth) {
+      setAuth({
+        ...auth,
+        user: userData?.getCurrentUser
+      });
+    }
+    // eslint-disable-next-line
+  }, [userData])
+
+  useEffect(() => {
+    if (auth?.token && !auth?.emulated) {
+      doGetUser();
+    }
+    // eslint-disable-next-line
+  }, [auth?.token])
 
   return <AuthContext.Provider value={bundle}>{children}</AuthContext.Provider>;
 };
