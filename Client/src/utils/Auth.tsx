@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { createContext, FC, useState } from "react";
-import { AuthBundle, Auth } from "../types/Auth";
+import { AuthBundle, Auth, UserType } from "../types/Auth";
 import { useStorage } from "./Storage";
 
 const AUTH_KEY = "QuarActive--Auth";
@@ -40,3 +40,14 @@ export const useBalance = () => {
   const { auth } = useAuth();
   return auth?.user?.balance;
 };
+
+export const emulateAuth = (type: UserType): Auth => ({
+  token: "anonymous",
+  emulated: true,
+  user: {
+    id: "anonymous",
+    email: "anonymous@quaractive.com",
+    type,
+    displayName: "Anonymous"
+  }
+});

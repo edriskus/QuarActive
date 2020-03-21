@@ -20,8 +20,9 @@ import { ReactComponent as ToiletPaper } from "../../illustrations/ToiletPaper.s
 
 export default function Header() {
   const classes = useStyles();
-  const { clearAuth } = useAuth();
+  const { clearAuth, auth } = useAuth();
   const token = useToken();
+  const emulated = auth?.emulated;
   const balance = useBalance();
 
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
@@ -46,7 +47,7 @@ export default function Header() {
               LOGO
             </Typography>
             <Box className={classes.centered}>
-              {!!token && (
+              {!!token && !emulated && (
                 <>
                   {balance != null && (
                     <>
@@ -84,7 +85,7 @@ export default function Header() {
                   </Menu>
                 </>
               )}
-              {!token && (
+              {(!token || emulated) && (
                 <>
                   <IconButton color="primary" component={Link} to="/login">
                     <VpnKeyOutlined />

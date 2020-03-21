@@ -4,18 +4,26 @@ import Landing from "../Landing/Landing";
 import NotFound from "../NotFound/NotFound";
 import Onboarding from "../Onboarding/Onboarding";
 import Login from "../Login/Login";
-import { useToken } from "../../utils/Auth";
+import { useToken, useAuth } from "../../utils/Auth";
 import Home from "../Home/Home";
 
 export default function Routes() {
+  const { auth } = useAuth();
   const token = useToken();
+  const emulated = auth?.emulated;
   return !!token ? (
     <Switch>
       <Route path="/" exact={true}>
         <Home />
       </Route>
       <Redirect path="/onboarding" to="/" />
-      <Redirect path="/login" to="/" />
+      {!emulated ? (
+        <Redirect path="/login" to="/" />
+      ) : (
+        <Route path="/login">
+          <Login />
+        </Route>
+      )}
       <Route>
         <NotFound />
       </Route>

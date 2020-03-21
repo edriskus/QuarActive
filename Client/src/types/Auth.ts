@@ -1,6 +1,7 @@
 export interface Auth {
   token: string;
   user: User;
+  emulated?: boolean;
 }
 
 export enum UserType {

@@ -12,9 +12,12 @@ import {
 import { AlternateEmail } from "@material-ui/icons";
 import { handleChange, findError } from "../../utils/Form";
 import * as yup from "yup";
+import { useAuth, emulateAuth } from "../../utils/Auth";
+import { UserType } from "../../types/Auth";
 
 interface Props {
   initialValue?: string;
+  type?: UserType;
   onChange(email: string): void;
 }
 
@@ -25,9 +28,10 @@ const schema = yup.object().shape({
     .required()
 });
 
-export default function OnboardEmail({ initialValue, onChange }: Props) {
+export default function OnboardEmail({ type, initialValue, onChange }: Props) {
   const { t } = useTranslation();
 
+  const { setAuth } = useAuth();
   const [email, setEmail] = useState(initialValue ?? "");
   const [errors, setErrors] = useState<yup.ValidationError[]>([]);
 
@@ -45,6 +49,15 @@ export default function OnboardEmail({ initialValue, onChange }: Props) {
     },
     [email, onChange]
   );
+
+  const handleSkip = useCallback(() => {
+    console.log(type);
+
+    if (type) {
+      console.log(type, emulateAuth(type));
+      setAuth(emulateAuth(type));
+    }
+  }, [setAuth, type]);
 
   const emailError = findError(errors, "email")?.message;
 
@@ -105,6 +118,7 @@ export default function OnboardEmail({ initialValue, onChange }: Props) {
                 variant="outlined"
                 color="primary"
                 fullWidth={true}
+                onClick={handleSkip}
               >
                 {t("common.skip")}
               </Button>

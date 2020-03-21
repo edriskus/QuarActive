@@ -75,7 +75,11 @@ export default function Onboarding() {
           <Redirect path="/onboarding/email" to="/onboarding/password" />
         )}
         <Route path="/onboarding/email" exact={true}>
-          <OnboardEmail initialValue={email} onChange={handleEmail} />
+          <OnboardEmail
+            initialValue={email}
+            onChange={handleEmail}
+            type={type}
+          />
         </Route>
         {!email && <Redirect to="/onboarding/email" />}
         <Route path="/onboarding/password" exact={true}>
