@@ -27,7 +27,6 @@ export const useStyles = makeStyles((theme: Theme) => ({
   },
   imageCardOverlaid: {
     position: "fixed",
-    height: 250,
     width: "100vw",
     borderRadius: 0,
     top: 0,

@@ -24,7 +24,7 @@ export default function Landing() {
         display="flex"
         width="100%"
         alignItems="center"
-        height={isMd ? "auto" : "80vh"}
+        height={isMd ? "auto" : "calc(100vh - 128px)"}
       >
         <Grid container={true}>
           <Grid item={true} xs={12} md={7}>

@@ -6,7 +6,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: theme.palette.primary.main,
+    background: "linear-gradient(141.27deg, #A3D9C6 9.14%, #B879C5 78.51%);",
     color: theme.palette.primary.contrastText
   }
 }));

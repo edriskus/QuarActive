@@ -1,11 +1,9 @@
 import clsx from "clsx";
 import React from "react";
-import { Slide, Card, Box, Grid, Typography } from "@material-ui/core";
+import { Slide, Card, Box } from "@material-ui/core";
 import { Task } from "../../types/Task";
 import { useStyles } from "./OverCard.styles";
-import TaskActions from "../TaskActions/TaskActions";
-import TaskSteps from "../TaskSteps/TaskSteps";
-import StatusBlob from "../StatusBlob/StatusBlob";
+import ViewTask from "../ViewTask/ViewTask";
 
 interface Props {
   task: Task;
@@ -26,33 +24,7 @@ export default function OverCard({ task, open, onClose }: Props) {
         <Card className={card} elevation={4}>
           <Box className={cardContent}>
             <Box paddingBottom={3} paddingX={3}>
-              <Grid
-                container={true}
-                spacing={1}
-                justify="space-between"
-                wrap="nowrap"
-              >
-                <Grid item={true} xs="auto">
-                  <TaskActions onClose={onClose} />
-                  <Typography variant="h3" color="primary" gutterBottom={true}>
-                    {task.title}
-                  </Typography>
-                  <Typography variant="body1">{task.description}</Typography>
-                </Grid>
-                <Grid item={true} xs="auto">
-                  <StatusBlob
-                    size={"120px"}
-                    placementX="right"
-                    placementY="top"
-                    margin={-4}
-                  >
-                    <Typography variant="button" color="inherit">
-                      {task.difficulty}
-                    </Typography>
-                  </StatusBlob>
-                </Grid>
-              </Grid>
-              <TaskSteps task={task} />
+              <ViewTask task={task} onClose={onClose} />
             </Box>
           </Box>
         </Card>

@@ -63,14 +63,14 @@ export default function ImageCard({
           image={src}
           style={{
             top: top !== null && !moved ? top : undefined,
-            height
+            height: moved ? 250 : height
           }}
           className={clsx(imageCard, {
             [imageCardFixed]: fixed,
             [imageCardOverlaid]: moved
           })}
         />
-        {fixed && <Box height={140} />}
+        {fixed && <Box height={height} />}
         <CardContent className={cardContent}>{children}</CardContent>
       </CardActionArea>
     </Card>

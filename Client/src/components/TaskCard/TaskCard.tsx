@@ -10,6 +10,7 @@ import {
 import ImageCard from "../ImageCard/ImageCard";
 import OverCard from "../OverCard/OverCard";
 import StatusBlob from "../StatusBlob/StatusBlob";
+import OverDialog from "../OverDialog/OverDialog";
 
 interface Props {
   task: Task;
@@ -31,7 +32,11 @@ export default function TaskCard({ task, minimal }: Props) {
 
   return (
     <Box onClick={openOverlaid}>
-      <ImageCard src={task.cover} overlaid={overlaid} height={imageHeight}>
+      <ImageCard
+        src={task.cover}
+        overlaid={overlaid && isSmall}
+        height={imageHeight}
+      >
         <Grid
           container={true}
           spacing={1}
@@ -73,7 +78,12 @@ export default function TaskCard({ task, minimal }: Props) {
           </Grid>
         </Grid>
       </ImageCard>
-      <OverCard task={task} open={overlaid} onClose={closeOverlaid} />
+      {isSmall && (
+        <OverCard task={task} open={overlaid} onClose={closeOverlaid} />
+      )}
+      {!isSmall && (
+        <OverDialog task={task} open={overlaid} onClose={closeOverlaid} />
+      )}
     </Box>
   );
 }
