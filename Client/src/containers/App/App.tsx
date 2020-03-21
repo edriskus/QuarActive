@@ -8,23 +8,26 @@ import Routes from "../Routes/Routes";
 import Header from "../../components/Header/Header";
 import { AuthProvider } from "../../utils/Auth";
 import CookieBar from "../CookieBar/CookieBar";
+import { LocaleProvider } from "../../utils/Translation";
 
 function App() {
   return (
-    <AuthProvider>
-      <ApolloProvider client={client}>
-        <ThemeProvider theme={LightTheme}>
-          <CssBaseline />
-          <Router>
-            <Header />
-            <Box paddingBottom={6}>
-              <Routes />
-            </Box>
-            <CookieBar />
-          </Router>
-        </ThemeProvider>
-      </ApolloProvider>
-    </AuthProvider>
+    <LocaleProvider>
+      <AuthProvider>
+        <ApolloProvider client={client}>
+          <ThemeProvider theme={LightTheme}>
+            <CssBaseline />
+            <Router>
+              <Header />
+              <Box paddingBottom={6}>
+                <Routes />
+              </Box>
+              <CookieBar />
+            </Router>
+          </ThemeProvider>
+        </ApolloProvider>
+      </AuthProvider>
+    </LocaleProvider>
   );
 }
 

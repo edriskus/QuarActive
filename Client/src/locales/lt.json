@@ -1,5 +1,42 @@
 {
+  "common": {
+    "skip": "Vėliau",
+    "next": "Pirmyn",
+    "finish": "Baigti",
+    "notNow": "Ne dabar"
+  },
   "landing": {
-    "stuckInQuarantine": "Užstrigai Karantine?"
+    "stuckInQuarantine": "Užstrigai Karantine?",
+    "storyDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "challengeAccepted": "Iššūkis priimtas"
+  },
+  "onboarding": {
+    "task1": "Pirma Užduotis",
+    "task1Description": "Papasakok apie save",
+    "task2": "Antra Užduotis",
+    "task2Description": "Įvesk savo el. pašto adresą",
+    "task3": "Trečia užduotis",
+    "task3Description": "Susikurk slaptažodį"
+  },
+  "login": {
+    "title": "Prisijungti",
+    "description": "Prisijungimo aprašymas",
+    "email": "El. paštas",
+    "password": "Slaptažodis",
+    "submit": "Pirmyn"
+  },
+  "home": {
+    "dailyChallenge": "Koks tavo šiandienos iššūkis?",
+    "moreChallenges": "Turi daugiau laiko?"
+  },
+  "gdpr": {
+    "message": "Šis internetinis puslapis naudoja slapukus, kad pagerintų naršymo kokybę",
+    "moreInfo": "Daugiau",
+    "agree": "Priimti"
+  },
+  "difficulty": {
+    "easy": "lengvas",
+    "medium": "vidutinis",
+    "hard": "sunkus"
   }
 }

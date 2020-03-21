@@ -1,3 +1,5 @@
+import { TranslatedString } from "./Translation";
+
 export enum TaskStatus {
   inProgress = "inProgress",
   done = "done"
@@ -17,9 +19,9 @@ export enum Difficulty {
 
 export interface Task {
   id: string;
-  title: string;
+  title: TranslatedString;
   cover: string;
-  description: string; // In markdown
+  description: TranslatedString; // In markdown
   difficulty: Difficulty;
   checkpoints: Checkpoint[];
   status: TaskStatus;
@@ -27,7 +29,7 @@ export interface Task {
 
 export interface Checkpoint {
   id: string;
-  title: string;
-  description: string; // In markdown
+  title: TranslatedString;
+  description: TranslatedString; // In markdown
   status: CheckpointStatus;
 }

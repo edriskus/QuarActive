@@ -11,6 +11,7 @@ import {
 import { Persona } from "../../types/Persona";
 import { UserType } from "../../types/Auth";
 import { ArrowForward } from "@material-ui/icons";
+import { useLocale, local } from "../../utils/Translation";
 
 interface Props {
   persona: Persona;
@@ -19,6 +20,7 @@ interface Props {
 
 export default function PersonaCard({ persona, onSelect }: Props) {
   const { title, description, type } = persona;
+  const { locale } = useLocale();
 
   const handleSelect = useCallback(() => {
     onSelect(type);
@@ -34,7 +36,7 @@ export default function PersonaCard({ persona, onSelect }: Props) {
       <CardContent>
         <Box marginBottom={3}>
           <Typography variant="h4" color="primary" align="center">
-            {title}
+            {local(title, locale)}
           </Typography>
         </Box>
         <Box paddingX={2}>
@@ -46,7 +48,7 @@ export default function PersonaCard({ persona, onSelect }: Props) {
           >
             <Grid item={true} xs="auto">
               <Typography variant="body1" align="left">
-                {description}
+                {local(description, locale)}
               </Typography>
             </Grid>
             <Grid item={true} xs="auto">

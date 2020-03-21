@@ -11,23 +11,44 @@ import TaskCard from "../../components/TaskCard/TaskCard";
 
 const task: Task = {
   id: "1",
-  title: "Visit a virtual museum",
-  description:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.",
+  title: {
+    en: "Visit a virtual museum",
+    lt: "Aplankyk virtualų muziejų"
+  },
+  description: {
+    en:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.",
+    lt:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do."
+  },
   difficulty: Difficulty.easy,
   checkpoints: [
     {
       id: "1",
-      title: "1st Step",
-      description:
-        "Guernica is a large 1937 oil painting on canvas by Spanish artist Pablo Picasso. One of Picasso's best known works, Guernica is regarded by many art critics as one of the most moving and powerful anti-war paintings in history. It is exhibited in the Museo Reina Sofía in Madrid.",
+      title: {
+        en: "1st step",
+        lt: "1 žingsnis"
+      },
+      description: {
+        en:
+          "Guernica is a large 1937 oil painting on canvas by Spanish artist Pablo Picasso. One of Picasso's best known works, Guernica is regarded by many art critics as one of the most moving and powerful anti-war paintings in history. It is exhibited in the Museo Reina Sofía in Madrid.",
+        lt:
+          "„Guernica“ yra didelis 1937 m. Aliejinis paveikslas, ant drobės pagamintas ispanų dailininko Pablo Picasso. Vienas geriausiai žinomų Pikaso darbų, „Guernica“ daugelio meno kritikų vertinamas kaip vienas judančių ir galingiausių prieškario paveikslų istorijoje. Jis eksponuojamas muziejuje „Reina Sofía“ Madride."
+      },
       status: CheckpointStatus.toDo
     },
     {
       id: "2",
-      title: "2nd Step",
-      description:
-        "Guernica is a large 1937 oil painting on canvas by Spanish artist Pablo Picasso. One of Picasso's best known works, Guernica is regarded by many art critics as one of the most moving and powerful anti-war paintings in history. It is exhibited in the Museo Reina Sofía in Madrid.",
+      title: {
+        en: "2nd step",
+        lt: "2 žingsnis"
+      },
+      description: {
+        en:
+          "Guernica is a large 1937 oil painting on canvas by Spanish artist Pablo Picasso. One of Picasso's best known works, Guernica is regarded by many art critics as one of the most moving and powerful anti-war paintings in history. It is exhibited in the Museo Reina Sofía in Madrid.",
+        lt:
+          "„Guernica“ yra didelis 1937 m. Aliejinis paveikslas, ant drobės pagamintas ispanų dailininko Pablo Picasso. Vienas geriausiai žinomų Pikaso darbų, „Guernica“ daugelio meno kritikų vertinamas kaip vienas judančių ir galingiausių prieškario paveikslų istorijoje. Jis eksponuojamas muziejuje „Reina Sofía“ Madride."
+      },
       status: CheckpointStatus.toDo
     }
   ],

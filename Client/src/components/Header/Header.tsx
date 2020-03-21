@@ -17,6 +17,7 @@ import {
 import { Link } from "react-router-dom";
 import { useToken, useAuth, useBalance } from "../../utils/Auth";
 import { ReactComponent as ToiletPaper } from "../../illustrations/ToiletPaper.svg";
+import { useLocale } from "../../utils/Translation";
 
 export default function Header() {
   const classes = useStyles();
@@ -25,13 +26,24 @@ export default function Header() {
   const emulated = auth?.emulated;
   const balance = useBalance();
 
+  const { locale, setLocale } = useLocale();
+
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+  const [localeAnchor, setLocaleAnchor] = useState<HTMLButtonElement | null>(
+    null
+  );
 
   const handleClick = useCallback((event: MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   }, []);
 
+  const handleLocale = useCallback((event: MouseEvent<HTMLButtonElement>) => {
+    setLocaleAnchor(event.currentTarget);
+  }, []);
+
   const handleClose = useCallback(() => setAnchorEl(null), []);
+
+  const handleLocaleClose = useCallback(() => setLocaleAnchor(null), []);
 
   const handleLogout = useCallback(() => {
     clearAuth();
@@ -47,6 +59,25 @@ export default function Header() {
               LOGO
             </Typography>
             <Box className={classes.centered}>
+              <IconButton
+                color="primary"
+                onClick={handleLocale}
+                aria-controls="profile-menu"
+                aria-haspopup="true"
+                className={classes.customButton}
+              >
+                <Typography variant="button">{locale}</Typography>
+              </IconButton>
+              <Menu
+                id="profile-menu"
+                anchorEl={localeAnchor}
+                keepMounted
+                open={Boolean(localeAnchor)}
+                onClose={handleLocaleClose}
+              >
+                <MenuItem onClick={() => setLocale("lt")}>LT</MenuItem>
+                <MenuItem onClick={() => setLocale("en")}>EN</MenuItem>
+              </Menu>
               {!!token && !emulated && (
                 <>
                   {balance != null && (

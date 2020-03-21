@@ -3,7 +3,7 @@ import { createContext, FC, useState } from "react";
 import { AuthBundle, Auth, UserType } from "../types/Auth";
 import { useStorage } from "./Storage";
 
-const AUTH_KEY = "QuarActive--Auth";
+export const AUTH_KEY = "QuarActive--Auth";
 
 const AuthContext = createContext<AuthBundle>({
   setAuth: () => null,

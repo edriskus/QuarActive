@@ -1,9 +1,10 @@
 import { UserType } from "./Auth";
 import { ComponentType } from "react";
+import { TranslatedString } from "./Translation";
 
 export interface Persona {
-  title: string;
+  title: TranslatedString;
   illustration: ComponentType;
-  description: string;
+  description: TranslatedString;
   type: UserType;
 }

@@ -5,16 +5,30 @@ import { ReactComponent as Adult } from "../illustrations/Adult.svg";
 
 export const personas: Persona[] = [
   {
-    title: "Teenager",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.",
+    title: {
+      en: "Teenager",
+      lt: "Jaunuolis"
+    },
+    description: {
+      en:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.",
+      lt:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod."
+    },
     illustration: Teenager,
     type: UserType.Teen
   },
   {
-    title: "Adult",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.",
+    title: {
+      en: "Adult",
+      lt: "Suaugęs"
+    },
+    description: {
+      en:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.",
+      lt:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod."
+    },
     illustration: Adult,
     type: UserType.Young
   }
