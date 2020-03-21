@@ -4,10 +4,33 @@ export default responsiveFontSizes(
   createMuiTheme({
     palette: {
       primary: {
-        main: "#4ba486"
+        main: "#B879C5"
       },
       secondary: {
-        main: "#e8ad24"
+        main: "#4ba486"
+      }
+    },
+    typography: {
+      fontFamily: "'Montserrat', sans-serif;",
+      button: {
+        fontSize: 17
+      },
+      body1: {
+        fontSize: 15
+      },
+      h3: {
+        fontSize: 32,
+        fontWeight: 600
+      }
+    },
+    shape: {
+      borderRadius: 12
+    },
+    overrides: {
+      MuiButton: {
+        root: {
+          padding: "13px 26px"
+        }
       }
     }
   })

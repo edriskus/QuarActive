@@ -9,7 +9,7 @@ import {
   MenuItem
 } from "@material-ui/core";
 import { useStyles } from "./Header.styles";
-import { AccountCircle, VpnKey } from "@material-ui/icons";
+import { AccountCircle, VpnKeyOutlined } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useToken, useAuth, useBalance } from "../../utils/Auth";
 
@@ -34,7 +34,7 @@ export default function Header() {
 
   return (
     <>
-      <AppBar position="fixed" color="transparent">
+      <AppBar position="fixed" color="transparent" elevation={0}>
         <Toolbar>
           <Box className={classes.wrapper}>
             <Typography variant="h6" component={Link} to="/">
@@ -68,8 +68,8 @@ export default function Header() {
               )}
               {!token && (
                 <>
-                  <IconButton color="secondary" component={Link} to="/login">
-                    <VpnKey />
+                  <IconButton color="primary" component={Link} to="/login">
+                    <VpnKeyOutlined />
                   </IconButton>
                 </>
               )}
