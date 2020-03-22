@@ -31,7 +31,7 @@ export class TaskResolver {
             taskIds.push(...ids);
         }
 
-        const tasks = await Task.find({ relations: ['checkpoints'], where: filter ? { id: In(taskIds) } : undefined });
+        const tasks = await Task.find({ relations: ['checkpoints'], where: filter ? { id: In(taskIds) } : undefined } );
         return tasks;
     }
 

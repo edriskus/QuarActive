@@ -7,6 +7,7 @@ import { UserTaskStatus } from "../../entities/UserTaskStatus";
 import { GraphQLError } from "graphql";
 import { Translation, Checkpoint } from "../../entities";
 import { UserCheckpointStatus } from "../../entities/UserCheckpointStatus";
+import { Check } from "typeorm";
 
 @Service()
 @Resolver(() => Checkpoint)
@@ -35,6 +36,17 @@ export class CheckpointResolver {
         await checkpointStatus.save();
 
         return checkpoint;
+    }
+
+    @Authorized()
+    @Mutation(() => Checkpoint)
+    async setOrder(@Arg('checkpointId') checkpointId: string, order: number) {
+        const checkpoint = await Checkpoint.findOne(checkpointId);
+        if (checkpoint) {
+            checkpoint.order = order;
+            return checkpoint;
+        }
+        throw new GraphQLError("No checkpoint found");
     }
 
     @FieldResolver(() => CheckpointStatus)

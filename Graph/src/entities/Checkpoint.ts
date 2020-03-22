@@ -14,6 +14,10 @@ export class Checkpoint extends GenericEntity {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
+    @Field(() => Number, { nullable: true })
+    @Column({ default: 0 })
+    order: number;
+
     @Field(() => Translation, { nullable: true })
     @OneToOne(() => Translation, { nullable: true, lazy: true })
     @JoinColumn()
