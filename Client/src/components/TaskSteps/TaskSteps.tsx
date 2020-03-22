@@ -33,16 +33,19 @@ import { useAuth } from "../../utils/Auth";
 import { Link } from "react-router-dom";
 import FBShare from "../FBShare/FBShare";
 import ReactMarkdown from "react-markdown";
+import { sortByOrder } from "../../utils/Task";
 
 interface Props {
   task: Task;
 }
 
 export default function TaskSteps({ task }: Props) {
+  const checkpoints = sortByOrder(task.checkpoints ?? []);
+
   const lastCompleteStep =
     task.status === TaskStatus.done
-      ? (task.checkpoints.length || 1) - 1
-      : task.checkpoints.reduce(
+      ? (checkpoints.length || 1) - 1
+      : checkpoints.reduce(
           (prev, current, i) =>
             current.status === CheckpointStatus.done ? i : prev,
           -1
@@ -50,7 +53,7 @@ export default function TaskSteps({ task }: Props) {
   const [activeStep, setActiveStep] = useState(lastCompleteStep + 1);
   const { auth } = useAuth();
   const { stepperGrid } = useStyles();
-  const step = task.checkpoints[activeStep] as Checkpoint | undefined;
+  const step = checkpoints[activeStep] as Checkpoint | undefined;
   const { locale } = useLocale();
   const { t } = useTranslation();
 
@@ -95,8 +98,10 @@ export default function TaskSteps({ task }: Props) {
     refetchQueries: [{ query: getCurrentUser }]
   });
 
+  const emulated = !!auth?.emulated || !auth?.token;
+
   const handleComplete = useCallback(() => {
-    if (!auth?.emulated) {
+    if (!emulated) {
       doChangeTask({
         variables: {
           status: TaskStatus.done,
@@ -106,13 +111,13 @@ export default function TaskSteps({ task }: Props) {
     } else {
       setActiveStep(activeStep + 1);
     }
-  }, [activeStep, auth, doChangeTask, task.id]);
+  }, [activeStep, doChangeTask, emulated, task.id]);
 
   const handleNext = useCallback(() => {
     if (activeStep <= lastCompleteStep) {
       setActiveStep(activeStep + 1);
     } else {
-      if (!auth?.emulated) {
+      if (!emulated) {
         doChangeCheckpoint({
           variables: {
             status: CheckpointStatus.done,
@@ -122,7 +127,7 @@ export default function TaskSteps({ task }: Props) {
       } else {
         setActiveStep(activeStep + 1);
       }
-      if (activeStep === task.checkpoints.length - 1 && !auth?.emulated) {
+      if (activeStep === checkpoints.length - 1 && !emulated) {
         doChangeTask({
           variables: {
             status: TaskStatus.done,
@@ -133,12 +138,12 @@ export default function TaskSteps({ task }: Props) {
     }
   }, [
     activeStep,
-    auth,
-    doChangeCheckpoint,
-    doChangeTask,
     lastCompleteStep,
+    emulated,
+    checkpoints.length,
+    doChangeCheckpoint,
     step,
-    task.checkpoints.length,
+    doChangeTask,
     task.id
   ]);
 
@@ -160,10 +165,10 @@ export default function TaskSteps({ task }: Props) {
       <Grid container={true} wrap="nowrap" alignItems="center">
         <Grid item={true} xs="auto" className={stepperGrid}>
           <Stepper
-            activeStep={!auth?.emulated ? lastCompleteStep + 1 : activeStep}
+            activeStep={!emulated ? lastCompleteStep + 1 : activeStep}
             alternativeLabel={true}
           >
-            {task.checkpoints.map((checkpoint, key) => (
+            {checkpoints.map((checkpoint, key) => (
               <Step key={key} onClick={handleNavigate(key)}>
                 <StepLabel> </StepLabel>
               </Step>
@@ -175,7 +180,7 @@ export default function TaskSteps({ task }: Props) {
             <CircularProgress />
           ) : (
             <IconButton color="primary" onClick={handleNext}>
-              {activeStep === task.checkpoints.length - 1 ? (
+              {activeStep === checkpoints.length - 1 ? (
                 <Check fontSize="large" />
               ) : (
                 <ArrowForward fontSize="large" />
@@ -185,7 +190,7 @@ export default function TaskSteps({ task }: Props) {
         </Grid>
       </Grid>
     </Box>
-  ) : task.checkpoints.length === 0 && activeStep === 0 ? (
+  ) : checkpoints.length === 0 && activeStep === 0 ? (
     <Grid container={true} wrap="nowrap" alignItems="center" justify="flex-end">
       <Grid item={true}>
         {loading ? (
@@ -197,9 +202,9 @@ export default function TaskSteps({ task }: Props) {
         )}
       </Grid>
     </Grid>
-  ) : (lastCompleteStep === task.checkpoints.length - 1 ||
+  ) : (lastCompleteStep === checkpoints.length - 1 ||
       task.status === TaskStatus.done) &&
-    !auth?.emulated ? (
+    !emulated ? (
     <Box
       display="flex"
       alignItems="center"
@@ -231,7 +236,7 @@ export default function TaskSteps({ task }: Props) {
         </IconButton>
       </Box>
     </Box>
-  ) : auth?.emulated ? (
+  ) : emulated ? (
     <Box
       display="flex"
       alignItems="center"

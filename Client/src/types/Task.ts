@@ -30,6 +30,7 @@ export interface Task {
 
 export interface Checkpoint {
   id: string;
+  order: number;
   title: TranslatedString;
   description: TranslatedString; // In markdown
   status: CheckpointStatus;

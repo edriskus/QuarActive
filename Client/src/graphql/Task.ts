@@ -18,6 +18,40 @@ export const getTasks = gql`
       status
       checkpoints {
         id
+        order
+        title {
+          lt
+          en
+        }
+        description {
+          lt
+          en
+        }
+        status
+      }
+    }
+  }
+`;
+
+export const getTask = gql`
+  query getTask($taskId: String!) {
+    task(taskId: $taskId) {
+      id
+      title {
+        lt
+        en
+      }
+      description {
+        lt
+        en
+      }
+      amount
+      cover
+      difficulty
+      status
+      checkpoints {
+        id
+        order
         title {
           lt
           en
@@ -39,6 +73,7 @@ export const changeCheckpointStatus = gql`
   ) {
     changeCheckpointStatus(status: $status, checkpointId: $checkpointId) {
       id
+      order
       title {
         lt
         en
@@ -70,6 +105,7 @@ export const changeTaskStatus = gql`
       status
       checkpoints {
         id
+        order
         title {
           lt
           en

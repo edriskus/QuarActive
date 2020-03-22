@@ -6,6 +6,7 @@ import Onboarding from "../Onboarding/Onboarding";
 import Login from "../Login/Login";
 import { useToken, useAuth } from "../../utils/Auth";
 import Home from "../Home/Home";
+import SingleTask from "../SingleTask/SingleTask";
 
 export default function Routes() {
   const { auth } = useAuth();
@@ -50,6 +51,9 @@ export default function Routes() {
       </Route>
       <Route path="/login">
         <Login />
+      </Route>
+      <Route path="/:taskId">
+        <SingleTask />
       </Route>
       <Route>
         <NotFound />
