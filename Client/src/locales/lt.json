@@ -1,0 +1,51 @@
+{
+  "common": {
+    "skip": "Vėliau",
+    "next": "Pirmyn",
+    "finish": "Baigti",
+    "notNow": "Ne dabar",
+    "or": "arba",
+    "share": "Bendrinti"
+  },
+  "landing": {
+    "stuckInQuarantine": "Užstrigai Karantine?",
+    "storyDescription": "Mes taip pat! Užsimerk, lėtai įkvėpk ir iškvėpk. Jau geriau? Turime tau daug daugiau veiklos kol esi namie! #stayhome",
+    "challengeAccepted": "Pradėti"
+  },
+  "onboarding": {
+    "task1": "Tavo pirma Užduotis!",
+    "task1Description": "Papasakok apie save",
+    "task1TraitsDescription": "Kokie tavo pomėgiai?",
+    "task2": "Susikurk paskyrą",
+    "task2Description": "Įvesk savo el. pašto adresą",
+    "task3": "Paskutinis žingsnis",
+    "task3Description": "Suprantame, kad tai - paslaptis, bet... koks tavo slaptažodis?"
+  },
+  "login": {
+    "title": "Prisijungti",
+    "description": "Naudok savo el. pašto adresą ir slaptažodį",
+    "email": "El. paštas",
+    "password": "Slaptažodis",
+    "submit": "Pirmyn"
+  },
+  "home": {
+    "dailyChallenge": "Tavo šiandienos iššūkis",
+    "moreChallenges": "Turi daugiau laiko?"
+  },
+  "gdpr": {
+    "message": "Šis internetinis puslapis naudoja slapukus, kad pagerintų naršymo kokybę",
+    "moreInfo": "Daugiau",
+    "agree": "Priimti"
+  },
+  "difficulty": {
+    "easy": "lengvas",
+    "medium": "vidutinis",
+    "hard": "sunkus"
+  },
+  "task": {
+    "congratsYouReceived": "Puiku! Tu gavai",
+    "congratsLoginPlease": "Puiku! Tau reikės užbaigti registraciją kad gautum",
+    "finishRegistration": "Užbaigti registraciją",
+    "didYouLike": "Ar patiko šis iššūkis?"
+  }
+}

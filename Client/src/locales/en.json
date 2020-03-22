@@ -1,0 +1,51 @@
+{
+  "common": {
+    "skip": "Skip",
+    "next": "Next",
+    "finish": "Finish",
+    "notNow": "Not now",
+    "or": "or",
+    "share": "Share"
+  },
+  "landing": {
+    "stuckInQuarantine": "Stuck in Quarantine?",
+    "storyDescription": "You’re not alone, we’re also in! Close your eyes, inhale-exhale. Feeling better already? We have plenty more for you to do while you're at home! #stayhome",
+    "challengeAccepted": "Get started"
+  },
+  "onboarding": {
+    "task1": "Your first task!",
+    "task1Description": "Tell us who you are",
+    "task1TraitsDescription": "What are your interests?",
+    "task2": "Create an account",
+    "task2Description": "Enter your email",
+    "task3": "Final step",
+    "task3Description": "We know that it's a secret, but what's your password?"
+  },
+  "login": {
+    "title": "Log in",
+    "description": "Use your email and password to log in",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Submit"
+  },
+  "home": {
+    "dailyChallenge": "Your featured challenge of the day",
+    "moreChallenges": "Ready for some more?"
+  },
+  "gdpr": {
+    "message": "This website uses cookies to ensure you get the best experience on our website",
+    "moreInfo": "More Info",
+    "agree": "Accept"
+  },
+  "difficulty": {
+    "easy": "easy",
+    "medium": "medium",
+    "hard": "hard"
+  },
+  "task": {
+    "congratsYouReceived": "Congrats! You received",
+    "congratsLoginPlease": "Congrats! Please finish your registration to receive",
+    "finishRegistration": "Finish registration",
+    "didYouLike": "Did you like this challenge?"
+  }
+}

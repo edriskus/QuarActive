@@ -3,26 +3,59 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@apollo/react-hooks": "^3.1.3",
+    "@material-ui/core": "^4.9.7",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.46",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "@types/jest": "^24.0.0",
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
+    "@types/react-div-100vh": "^0.3.0",
     "@types/react-dom": "^16.9.0",
+    "@types/react-router-dom": "^5.1.3",
+    "@types/yup": "^0.26.33",
+    "apollo-boost": "^0.4.7",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "graphql": "^14.6.0",
+    "i18next": "^19.3.3",
+    "prettier": "^1.19.1",
     "react": "^16.13.1",
+    "react-div-100vh": "^0.3.8",
     "react-dom": "^16.13.1",
+    "react-i18next": "^11.3.4",
+    "react-markdown": "^4.3.1",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
-    "typescript": "~3.7.2"
+    "typescript": "~3.7.2",
+    "yup": "^0.28.3"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint-fix": "eslint src --ext .ts,.tsx --fix",
+    "push": "aws s3 sync build s3://quaractive --delete --size-only && aws s3 sync build s3://quaractive --delete --exclude \"*\" --include \"index.html\"",
+    "deploy": "yarn build && yarn push"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "plugins": [
+      "prettier"
+    ],
+    "extends": [
+      "react-app",
+      "plugin:prettier/recommended"
+    ],
+    "rules": {
+      "prettier/prettier": "warn",
+      "prefer-const": "error",
+      "no-tabs": "warn"
+    }
   },
   "browserslist": {
     "production": [
