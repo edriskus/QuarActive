@@ -40,6 +40,10 @@ export class UserResolver {
 
   @Mutation(() => AuthResponse)
   async register(@Arg("data") data: RegisterInput) {
+    const exists = await User.findOne({ where: { email: data.email } });
+    if (exists) {
+        throw new GraphQLError(`User with email ${data.email} already exists.`);
+    }
     data.password = sha256(data.password);
     const personalityTraits = data.personalityTraits;
     // this.
