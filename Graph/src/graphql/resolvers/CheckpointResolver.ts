@@ -40,7 +40,7 @@ export class CheckpointResolver {
 
     @Authorized()
     @Mutation(() => Checkpoint)
-    async setOrder(@Arg('checkpointId') checkpointId: string, order: number) {
+    async setOrder(@Arg('checkpointId') checkpointId: string, @Arg('order') order: number) {
         const checkpoint = await Checkpoint.findOne(checkpointId);
         if (checkpoint) {
             checkpoint.order = order;
