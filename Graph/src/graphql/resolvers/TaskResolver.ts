@@ -32,7 +32,10 @@ export class TaskResolver {
         }
 
         const tasks = (await Task.find({ relations: ['checkpoints'], where: filter ? { id: In(taskIds) } : undefined } )).map(task => {
-            task.checkpoints = task.checkpoints.sort((a, b) => a.order - b.order);
+            console.log(task.checkpoints);
+            if (task.checkpoints) {
+                task.checkpoints = task.checkpoints.sort((a, b) => a.order - b.order);
+            }
             return task;
         });
         return tasks;
