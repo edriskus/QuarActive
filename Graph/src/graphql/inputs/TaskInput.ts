@@ -11,7 +11,7 @@ export class TaskInput {
   @Field()
   description: TranslationInput;
 
-  @Field()
+  @Field({ nullable: true })
   healhTip: TranslationInput;
 
   @Field(() => [CheckpointInput])
