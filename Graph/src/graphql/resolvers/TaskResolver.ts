@@ -5,7 +5,7 @@ import { TaskStatus, Difficulty, PersonalityTraitEnum, UserType } from "../../en
 import { Context } from "../types";
 import { UserTaskStatus } from "../../entities/UserTaskStatus";
 import { GraphQLError } from "graphql";
-import { TaskInput } from "../inputs";
+import { TaskInput, TranslationInput } from "../inputs";
 import { Translation, Checkpoint, User, UserTypeTask } from "../../entities";
 import { UserCheckpointStatus } from "../../entities/UserCheckpointStatus";
 import { PersonalityTaskTrait } from "../../entities/PersonalityTaskTrait";
@@ -63,6 +63,77 @@ export class TaskResolver {
             return Checkpoint.create(checkpoint).save();
         }));
         return taskDb;
+    }
+
+    @Authorized()
+    @Mutation(() => Task)
+    async changeAmount(@Arg('taskId') taskId: string, @Arg('amount') amount: number) {
+        const task = await Task.findOne(taskId);
+        
+        if (task) {
+            task.amount = amount;
+            return await task.save();
+        }
+
+        throw new GraphQLError("Task not found");
+    }
+
+    @Authorized()
+    @Mutation(() => Task)
+    async changeCover(@Arg('taskId') taskId: string, @Arg('amount') cover: string) {
+        const task = await Task.findOne(taskId);
+        
+        if (task) {
+            task.cover = cover;
+            return await task.save();
+        }
+
+        throw new GraphQLError("Task not found");
+    }
+
+    @Authorized()
+    @Mutation(() => Task)
+    async changeTitle(@Arg('taskId') taskId: string, @Arg('title') titleObj: TranslationInput) {
+        const task = await Task.findOne(taskId);
+        
+        if (task) {
+            const title = Translation.create(titleObj);
+            await title.save();
+            task.title = title;
+            return await task.save();
+        }
+
+        throw new GraphQLError("Task not found");
+    }
+
+    @Authorized()
+    @Mutation(() => Task)
+    async changeDescription(@Arg('taskId') taskId: string, @Arg('title') descriptionObj: TranslationInput) {
+        const task = await Task.findOne(taskId);
+        
+        if (task) {
+            const description = Translation.create(descriptionObj);
+            await description.save();
+            task.description = description;
+            return await task.save();
+        }
+
+        throw new GraphQLError("Task not found");
+    }
+
+    @Authorized()
+    @Mutation(() => Task)
+    async changeHealthTip(@Arg('taskId') taskId: string, @Arg('title') tipObject: TranslationInput) {
+        const task = await Task.findOne(taskId);
+        
+        if (task) {
+            const healhTip = Translation.create(tipObject);
+            await healhTip.save();
+            task.healhTip = healhTip;
+            return await task.save();
+        }
+
+        throw new GraphQLError("Task not found");
     }
 
     @Authorized()
