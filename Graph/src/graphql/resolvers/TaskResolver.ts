@@ -35,7 +35,7 @@ export class TaskResolver {
         return tasks;
     }
 
-    @Query(() => [Task])
+    @Query(() => Task)
     async task (@Arg('taskId') taskId: string) {
         const task = (await Task.findOne(taskId, { relations: ['checkpoints'] }));
         if (!task) {
