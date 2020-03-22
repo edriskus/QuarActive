@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useCallback } from "react";
 import { Task } from "../../types/Task";
 import {
   Box,
@@ -17,15 +17,36 @@ import Difficulty from "../Difficulty/Difficulty";
 interface Props {
   task: Task;
   minimal?: boolean;
+  open?: boolean;
+  onOpen(taskId: string): void;
+  onClose(): void;
 }
 
-export default function TaskCard({ task, minimal }: Props) {
-  const [overlaid, setOverlaid] = useState(false);
+export default function TaskCard({
+  task,
+  minimal,
+  onOpen,
+  onClose,
+  open
+}: Props) {
+  const overlaid = open;
+  const setOverlaid = useCallback(
+    (value?: boolean) => {
+      if (value) {
+        onOpen(task.id);
+      } else {
+        onClose();
+      }
+    },
+    [onClose, onOpen, task.id]
+  );
   const openOverlaid = useCallback(() => !overlaid && setOverlaid(true), [
-    overlaid
+    overlaid,
+    setOverlaid
   ]);
   const closeOverlaid = useCallback(() => overlaid && setOverlaid(false), [
-    overlaid
+    overlaid,
+    setOverlaid
   ]);
 
   const theme = useTheme();
@@ -37,6 +58,7 @@ export default function TaskCard({ task, minimal }: Props) {
     <Box onClick={openOverlaid}>
       <ImageCard
         src={task.cover}
+        key={"imageCard" + task.id}
         overlaid={overlaid && isSmall}
         height={imageHeight}
       >
@@ -79,10 +101,20 @@ export default function TaskCard({ task, minimal }: Props) {
         </Grid>
       </ImageCard>
       {isSmall && (
-        <OverCard task={task} open={overlaid} onClose={closeOverlaid} />
+        <OverCard
+          key={"overCard" + task.id}
+          task={task}
+          open={!!overlaid}
+          onClose={closeOverlaid}
+        />
       )}
       {!isSmall && (
-        <OverDialog task={task} open={overlaid} onClose={closeOverlaid} />
+        <OverDialog
+          key={"overDialog" + task.id}
+          task={task}
+          open={!!overlaid}
+          onClose={closeOverlaid}
+        />
       )}
     </Box>
   );

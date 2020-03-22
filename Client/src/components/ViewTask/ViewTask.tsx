@@ -12,6 +12,7 @@ import StatusBlob from "../StatusBlob/StatusBlob";
 import TaskSteps from "../TaskSteps/TaskSteps";
 import { useLocale, local } from "../../utils/Translation";
 import Difficulty from "../Difficulty/Difficulty";
+import { useStyles } from "./ViewTask.styles";
 
 interface Props {
   task: Task;
@@ -22,6 +23,7 @@ export default function ViewTask({ task, onClose }: Props) {
   const { locale } = useLocale();
   const title = local(task.title, locale);
 
+  const classes = useStyles();
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -39,11 +41,16 @@ export default function ViewTask({ task, onClose }: Props) {
           <img src={task.cover} height={250} alt={title} />
         </Box>
       </Hidden>
-      <Typography variant="h3" color="primary" gutterBottom={true}>
+      <Typography
+        variant="h3"
+        color="primary"
+        gutterBottom={true}
+        className={classes.mwTop}
+      >
         {title}
       </Typography>
       {showDescription && (
-        <Typography variant="body1">
+        <Typography variant="body1" className={classes.mwTop}>
           {local(task.description, locale)}
         </Typography>
       )}

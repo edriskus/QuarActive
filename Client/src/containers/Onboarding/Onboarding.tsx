@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import OnboardEmail from "../OnboardEmail/OnboardEmail";
 import OnboardPersona from "../OnboardPersona/OnboardPersona";
@@ -8,17 +8,30 @@ import OnboardPassword from "../OnboardPassword/OnboardPassword";
 import { useMutation } from "@apollo/react-hooks";
 import { useAuth } from "../../utils/Auth";
 import { register } from "../../graphql/Auth";
+import { PersonalityTraitType } from "../../types/Persona";
 
 export default function Onboarding() {
-  const [type, setType] = useState<UserType | undefined>();
+  const { auth, setAuth } = useAuth();
+  const [type, setType] = useState<UserType | undefined>(
+    auth?.user?.type ?? undefined
+  );
+  const [traits, setTraits] = useState<PersonalityTraitType[]>(
+    auth?.user?.personalityTraits ?? []
+  );
   const [email, setEmail] = useState<string | undefined>();
   const [password, setPassword] = useState<string | undefined>();
-  const { setAuth } = useAuth();
+  const [personSubmitted, setPersonSubmitted] = useState<boolean>(
+    !!type && traits.length > 0
+  );
 
-  const activeStep = !type ? 0 : !email ? 1 : 2;
+  const activeStep = !personSubmitted ? 0 : !email ? 1 : 2;
 
   const handleType = useCallback((type: UserType) => {
     setType(type);
+  }, []);
+
+  const handleTraits = useCallback((traits: PersonalityTraitType[]) => {
+    setTraits(traits);
   }, []);
 
   const handleEmail = useCallback((email: string) => {
@@ -34,17 +47,25 @@ export default function Onboarding() {
   const handlePassword = useCallback(
     (password: string) => {
       setPassword(password);
-      const variables = { type, email, password };
+      const variables = { type, email, password, personalityTraits: traits };
       doRegister({
         variables
       });
     },
-    [doRegister, email, type]
+    [doRegister, email, traits, type]
   );
 
   const goToType = useCallback(() => setType(undefined), []);
 
   const goToEmail = useCallback(() => setEmail(undefined), []);
+
+  const handlePersonSubmit = useCallback(() => setPersonSubmitted(true), []);
+
+  useEffect(() => {
+    if (!type) {
+      setPersonSubmitted(false);
+    }
+  }, [type]);
 
   return (
     <>
@@ -62,13 +83,19 @@ export default function Onboarding() {
         </Stepper>
       </Container>
       <Switch>
-        {!!type && (
+        {personSubmitted && (
           <Redirect path="/onboarding/persona" to="/onboarding/email" />
         )}
         <Route path="/onboarding/persona" exact={true}>
-          <OnboardPersona onChange={handleType} />
+          <OnboardPersona
+            type={type}
+            traits={traits}
+            onTypeChange={handleType}
+            onTraitsChange={handleTraits}
+            onNext={handlePersonSubmit}
+          />
         </Route>
-        {!type && <Redirect to="/onboarding/persona" />}
+        {!personSubmitted && <Redirect to="/onboarding/persona" />}
         {!!email && (
           <Redirect path="/onboarding/email" to="/onboarding/password" />
         )}
@@ -76,6 +103,7 @@ export default function Onboarding() {
           <OnboardEmail
             initialValue={email}
             onChange={handleEmail}
+            traits={traits}
             type={type}
           />
         </Route>

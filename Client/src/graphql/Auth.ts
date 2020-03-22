@@ -10,19 +10,26 @@ export const login = gql`
         displayName
         balance
         type
+        personalityTraits
       }
     }
   }
 `;
 
 export const register = gql`
-  mutation register($email: String!, $password: String!, $type: UserType!) {
+  mutation register(
+    $email: String!
+    $password: String!
+    $type: UserType!
+    $personalityTraits: [PersonalityTraitEnum!]!
+  ) {
     register(
       data: {
         email: $email
         password: $password
         type: $type
         displayName: "TEST"
+        personalityTraits: $personalityTraits
       }
     ) {
       token
@@ -32,6 +39,7 @@ export const register = gql`
         displayName
         balance
         type
+        personalityTraits
       }
     }
   }
@@ -45,6 +53,7 @@ export const getCurrentUser = gql`
       displayName
       balance
       type
+      personalityTraits
     }
   }
 `;

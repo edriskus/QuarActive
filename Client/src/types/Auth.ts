@@ -1,3 +1,5 @@
+import { PersonalityTraitType } from "./Persona";
+
 export interface Auth {
   token: string;
   user: User;
@@ -15,6 +17,7 @@ export interface User {
   email: string;
   type: UserType;
   displayName: string;
+  personalityTraits: PersonalityTraitType[];
   balance?: number;
 }
 

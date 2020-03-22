@@ -31,5 +31,19 @@ export const personas: Persona[] = [
     },
     illustration: Adult,
     type: UserType.Young
+  },
+  {
+    title: {
+      en: "Unicorn",
+      lt: "Vienaragis"
+    },
+    description: {
+      en:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.",
+      lt:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod."
+    },
+    illustration: Adult,
+    type: UserType.Family
   }
 ];

@@ -16,7 +16,13 @@ export default function Routes() {
       <Route path="/" exact={true}>
         <Home />
       </Route>
-      <Redirect path="/onboarding" to="/" />
+      {!emulated ? (
+        <Redirect path="/onboarding" to="/" />
+      ) : (
+        <Route path="/onboarding">
+          <Onboarding />
+        </Route>
+      )}
       {!emulated ? (
         <Redirect path="/login" to="/" />
       ) : (
@@ -24,6 +30,9 @@ export default function Routes() {
           <Login />
         </Route>
       )}
+      <Route path="/:taskId">
+        <Home />
+      </Route>
       <Route>
         <NotFound />
       </Route>
@@ -32,6 +41,9 @@ export default function Routes() {
     <Switch>
       <Route path="/" exact={true}>
         <Landing />
+      </Route>
+      <Route path="/onboarding">
+        <Onboarding />
       </Route>
       <Route path="/onboarding">
         <Onboarding />

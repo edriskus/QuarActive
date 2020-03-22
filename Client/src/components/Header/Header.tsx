@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 import { useToken, useAuth, useBalance } from "../../utils/Auth";
 import { ReactComponent as ToiletPaper } from "../../illustrations/ToiletPaper.svg";
 import { useLocale } from "../../utils/Translation";
+import { ReactComponent as Logo } from "../../illustrations/Logo_1.svg";
 
 export default function Header() {
   const classes = useStyles();
@@ -48,11 +49,16 @@ export default function Header() {
 
   return (
     <>
-      <AppBar position="fixed" color="transparent" elevation={0}>
+      <AppBar
+        position="fixed"
+        color="default"
+        className={classes.appBar}
+        elevation={0}
+      >
         <Toolbar>
           <Box className={classes.wrapper}>
-            <Typography variant="h6" component={Link} to="/">
-              LOGO
+            <Typography component={Link} to="/">
+              <Logo height="2rem" />
             </Typography>
             <Box className={classes.centered}>
               {!!token && !emulated && balance != null && (

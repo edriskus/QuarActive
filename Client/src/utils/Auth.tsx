@@ -3,7 +3,8 @@ import { createContext, FC, useState } from "react";
 import { AuthBundle, Auth, UserType, User } from "../types/Auth";
 import { useStorage } from "./Storage";
 import { getCurrentUser } from "../graphql/Auth";
-import { useLazyQuery } from "@apollo/react-hooks";
+import { useLazyQuery, useApolloClient } from "@apollo/react-hooks";
+import { PersonalityTraitType } from "../types/Persona";
 
 export const AUTH_KEY = "QuarActive--Auth";
 
@@ -14,6 +15,7 @@ const AuthContext = createContext<AuthBundle>({
 
 export const AuthProvider: FC = ({ children }) => {
   const [getLocal, setLocal] = useStorage<Auth | undefined>(AUTH_KEY);
+  const client = useApolloClient();
   const [auth, setAuth] = useState<Auth | undefined>(getLocal() ?? undefined);
   const [doGetUser, { data: userData }] = useLazyQuery<{
     getCurrentUser: User;
@@ -46,6 +48,7 @@ export const AuthProvider: FC = ({ children }) => {
     if (auth?.token && !auth?.emulated) {
       doGetUser();
     }
+    client.resetStore();
     // eslint-disable-next-line
   }, [auth?.token])
 
@@ -66,13 +69,17 @@ export const useBalance = () => {
   return auth?.user?.balance;
 };
 
-export const emulateAuth = (type: UserType): Auth => ({
+export const emulateAuth = (
+  type: UserType,
+  personalityTraits: PersonalityTraitType[]
+): Auth => ({
   token: "anonymous",
   emulated: true,
   user: {
     id: "anonymous",
     email: "anonymous@quaractive.com",
     type,
+    personalityTraits,
     displayName: "Anonymous"
   }
 });

@@ -14,10 +14,13 @@ import { handleChange, findError } from "../../utils/Form";
 import * as yup from "yup";
 import { useAuth, emulateAuth } from "../../utils/Auth";
 import { UserType } from "../../types/Auth";
+import { useHistory } from "react-router-dom";
+import { PersonalityTraitType } from "../../types/Persona";
 
 interface Props {
   initialValue?: string;
   type?: UserType;
+  traits?: PersonalityTraitType[];
   onChange(email: string): void;
 }
 
@@ -28,9 +31,14 @@ const schema = yup.object().shape({
     .required()
 });
 
-export default function OnboardEmail({ type, initialValue, onChange }: Props) {
+export default function OnboardEmail({
+  type,
+  traits,
+  initialValue,
+  onChange
+}: Props) {
   const { t } = useTranslation();
-
+  const { push } = useHistory();
   const { setAuth } = useAuth();
   const [email, setEmail] = useState(initialValue ?? "");
   const [errors, setErrors] = useState<yup.ValidationError[]>([]);
@@ -51,10 +59,11 @@ export default function OnboardEmail({ type, initialValue, onChange }: Props) {
   );
 
   const handleSkip = useCallback(() => {
-    if (type) {
-      setAuth(emulateAuth(type));
+    if (type && (traits?.length ?? 0) > 0) {
+      setAuth(emulateAuth(type, traits ?? []));
+      push("/");
     }
-  }, [setAuth, type]);
+  }, [push, setAuth, traits, type]);
 
   const emailError = findError(errors, "email")?.message;
 

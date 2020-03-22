@@ -18,6 +18,7 @@ import { ReactComponent as LandingIllustration } from "../../illustrations/Landi
 import { AlternateEmail, LockOutlined } from "@material-ui/icons";
 import * as yup from "yup";
 import GraphErrors from "../../components/GraphErrors/GraphErrors";
+import { Link } from "react-router-dom";
 
 const schema = yup.object().shape({
   email: yup
@@ -32,7 +33,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<yup.ValidationError[]>([]);
 
-  const { setAuth } = useAuth();
+  const { auth, setAuth } = useAuth();
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -137,6 +138,23 @@ export default function Login() {
             </Button>
           )}
         </Box>
+        {auth?.emulated && (
+          <Box paddingY={3} display="flex" flexDirection="column">
+            <Typography variant="button" align="center" gutterBottom={true}>
+              {t("common.or")}
+            </Typography>
+            <Box display="flex" justifyContent="center" width="100%">
+              <Button
+                color="primary"
+                variant="outlined"
+                component={Link}
+                to="/onboarding/email"
+              >
+                {t("task.finishRegistration")}
+              </Button>
+            </Box>
+          </Box>
+        )}
       </form>
     </Container>
   );
