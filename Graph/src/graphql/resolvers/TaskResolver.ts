@@ -35,6 +35,16 @@ export class TaskResolver {
         return tasks;
     }
 
+    @Query(() => [Task])
+    async task (@Arg('taskId') taskId: string) {
+        const task = (await Task.findOne(taskId, { relations: ['checkpoints'] }));
+        if (!task) {
+            throw new GraphQLError("Task not found");
+        }
+        return task;
+
+    }
+
     @Authorized()
     @Mutation(() => Task)
     async addTask(@Arg('data') data: TaskInput) {
