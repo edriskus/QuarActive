@@ -11,6 +11,9 @@ export class TaskInput {
   @Field()
   description: TranslationInput;
 
+  @Field()
+  healhTip: TranslationInput;
+
   @Field(() => [CheckpointInput])
   checkpoints: [CheckpointInput];
 

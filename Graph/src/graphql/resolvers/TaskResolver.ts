@@ -1,13 +1,14 @@
 import { Resolver, Mutation, Args, Query, Authorized, Ctx, FieldResolver, Root, ResolverInterface, Arg } from "type-graphql";
 import { Service } from "typedi";
 import { Task } from "../../entities/Task";
-import { TaskStatus, Difficulty } from "../../entities/enums";
+import { TaskStatus, Difficulty, PersonalityTraitEnum, UserType } from "../../entities/enums";
 import { Context } from "../types";
 import { UserTaskStatus } from "../../entities/UserTaskStatus";
 import { GraphQLError } from "graphql";
 import { TaskInput } from "../inputs";
-import { Translation, Checkpoint, User } from "../../entities";
+import { Translation, Checkpoint, User, UserTypeTask } from "../../entities";
 import { UserCheckpointStatus } from "../../entities/UserCheckpointStatus";
+import { PersonalityTaskTrait } from "../../entities/PersonalityTaskTrait";
 
 @Service()
 @Resolver(() => Task)
@@ -28,11 +29,14 @@ export class TaskResolver {
         await title.save(); 
         const description = Translation.create(data.description);
         await description.save();
+        const healthTip = Translation.create(data.healhTip);
+        await healthTip.save();
         task.title = title;
         task.amount = data.amount;
         task.description = description;
         task.difficulty = data.difficulty;
         task.cover = data.cover;
+        task.healhTip = healthTip;
         const taskDb = await task.save();
         taskDb.checkpoints = await Promise.all(data.checkpoints.map(async checkpoint => {
             Object.assign(checkpoint, { task: taskDb });
@@ -56,6 +60,8 @@ export class TaskResolver {
             const checkpoints = (await Checkpoint.find({ where: { taskId }})).map(c => c.id);
             await Promise.all(checkpoints.map(async checkpointId => UserCheckpointStatus.delete({ checkpointId })));
             await Checkpoint.delete({ taskId });
+            await PersonalityTaskTrait.delete({ taskId });
+            await UserTypeTask.delete({ taskId });
             await Task.delete({ id: taskId })
             // TODO: Remove traits && user types
             return "Ok";
@@ -112,4 +118,88 @@ export class TaskResolver {
         }
         return taskStatus.status;
     }
+
+    async savePersonalityTraits(
+      traits: PersonalityTraitEnum[],
+      taskId: string
+    ): Promise<Task> {
+      const personalityTraits = await PersonalityTaskTrait.find({
+        where: { taskId }
+      });
+      const personalityTraitsToRemove = personalityTraits.filter(
+        trait => !traits.includes(trait.personalityTrait)
+      );
+      await PersonalityTaskTrait.remove(personalityTraitsToRemove);
+      const promises = traits.map(async trait => {
+        if (!personalityTraits.map(p => p.personalityTrait).includes(trait)) {
+          const personalityTrait = new PersonalityTaskTrait();
+          personalityTrait.taskId = taskId;
+          personalityTrait.personalityTrait = trait;
+          return personalityTrait.save();
+        }
+        return Promise.resolve();
+      });
+      await Promise.all(promises);
+      return await Task.findOne(taskId) as Task;
+    }
+  
+
+    @Authorized()
+    @Mutation(() => Task)
+    async setTaskPersonalityTraits(
+        @Arg("traits", () => [PersonalityTraitEnum]) traits: PersonalityTraitEnum[],
+        @Arg('taskId') taskId: string
+    ) {
+        return this.savePersonalityTraits(traits, taskId);
+    }
+
+    async saveUserTypes(
+        types: UserType[],
+        taskId: string
+      ): Promise<Task> {
+        const userTypes = await UserTypeTask.find({
+          where: { taskId }
+        });
+        const userTypesToRemove = userTypes.filter(
+          type => !types.includes(type.userType)
+        );
+        await UserTypeTask.remove(userTypesToRemove);
+        const promises = types.map(async type => {
+          if (!userTypes.map(t => t.userType).includes(type)) {
+            const userType = new UserTypeTask();
+            userType.taskId = taskId;
+            userType.userType = type;
+            return userType.save();
+          }
+          return Promise.resolve();
+        });
+        await Promise.all(promises);
+        return await Task.findOne(taskId) as Task;
+      }
+    
+  
+      @Authorized()
+      @Mutation(() => Task)
+      async setTaskUserTypes(
+          @Arg("types", () => [UserType]) types: UserType[],
+          @Arg('taskId') taskId: string
+      ) {
+          return this.saveUserTypes(types, taskId);
+      }
+
+      @FieldResolver(() => [PersonalityTraitEnum])
+      async personalityTraits(@Root() task: Task) {
+          const personalityTraits = await PersonalityTaskTrait.find({
+          where: { taskId: task.id }
+          });
+          return personalityTraits.map(p => p.personalityTrait);
+      }
+  
+      @FieldResolver(() => [UserType])
+      async types(@Root() task: Task) {
+          const userTypes = await UserTypeTask.find({
+          where: { taskId: task.id }
+          });
+          return userTypes.map(t => t.userType);
+      }
 }

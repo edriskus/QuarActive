@@ -1,7 +1,7 @@
 import { Entity, Column, Index, PrimaryGeneratedColumn, OneToMany, JoinColumn, OneToOne } from 'typeorm';
 import { ObjectType, Field, ID } from 'type-graphql';
 import { GenericEntity } from './GenericEntity';
-import { TaskStatus, Difficulty } from './enums';
+import { TaskStatus, Difficulty, PersonalityTraitEnum, UserType } from './enums';
 import { UserTaskStatus } from './UserTaskStatus';
 import { Translation } from './Translation';
 import { Checkpoint } from './Checkpoint';
@@ -25,6 +25,11 @@ export class Task extends GenericEntity {
     @JoinColumn()
     description: Translation;
 
+    @Field(() => Translation, { nullable: true })
+    @OneToOne(() => Translation, { nullable: true, lazy: true })
+    @JoinColumn()
+    healhTip: Translation;
+
     @Field(() => Number)
     @Column({ default: 0 })
     amount: number;
@@ -47,9 +52,9 @@ export class Task extends GenericEntity {
     @OneToMany(() => Checkpoint, checkpoint => checkpoint.task, { nullable: true, lazy: true })
     checkpoints!: Checkpoint[];
 
-    // @OneToMany(() => PersonalityTaskTrait, personalityTrait => personalityTrait.taskId, { lazy: true })
-    // personalityTraits: PersonalityTaskTrait[];
+    @OneToMany(() => PersonalityTaskTrait, personalityTrait => personalityTrait.task, { lazy: true })
+    personalityTraits: PersonalityTaskTrait[];
 
-    // @OneToMany(() => UserTypeTask, userType => userType.taskId, { lazy: true })
-    // types: UserTypeTask[];
+    @OneToMany(() => UserTypeTask, userType => userType.task, { lazy: true })
+    types: UserTypeTask[];
 }

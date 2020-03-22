@@ -83,7 +83,6 @@ export class UserResolver {
       return null;
   }
 
-  @Mutation(() => User)
   async savePersonalityTraits(
     traits: PersonalityTraitEnum[],
     userId: string
