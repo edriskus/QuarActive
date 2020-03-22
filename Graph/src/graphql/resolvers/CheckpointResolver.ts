@@ -44,6 +44,7 @@ export class CheckpointResolver {
         const checkpoint = await Checkpoint.findOne(checkpointId);
         if (checkpoint) {
             checkpoint.order = order;
+            await checkpoint.save();
             return checkpoint;
         }
         throw new GraphQLError("No checkpoint found");
