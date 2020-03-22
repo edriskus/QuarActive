@@ -9,27 +9,27 @@
   },
   "landing": {
     "stuckInQuarantine": "Stuck in Quarantine?",
-    "storyDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    "challengeAccepted": "Challenge Accepted"
+    "storyDescription": "You’re not alone, we’re also in! Close your eyes, inhale-exhale. Feeling better already? We have plenty more for you to do while in quarantine!",
+    "challengeAccepted": "Get started"
   },
   "onboarding": {
-    "task1": "1st Task",
+    "task1": "Your first task!",
     "task1Description": "Tell us who you are",
-    "task1TraitsDescription": "Select what you're interested in",
-    "task2": "2nd Task",
+    "task1TraitsDescription": "What are your interests?",
+    "task2": "Create an account",
     "task2Description": "Enter your email",
-    "task3": "3rd Task",
-    "task3Description": "It’s secret, but what’s your password?"
+    "task3": "Final step",
+    "task3Description": "We know that it's a secret, but what's your password?"
   },
   "login": {
     "title": "Log in",
-    "description": "Login description",
+    "description": "Use your email and password to log in",
     "email": "Email",
     "password": "Password",
     "submit": "Submit"
   },
   "home": {
-    "dailyChallenge": "What’s your challenge for today?",
+    "dailyChallenge": "Your featured challenge of the day",
     "moreChallenges": "Ready for some more?"
   },
   "gdpr": {

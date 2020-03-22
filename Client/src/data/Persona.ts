@@ -1,7 +1,5 @@
 import { Persona } from "../types/Persona";
 import { UserType } from "../types/Auth";
-import { ReactComponent as Teenager } from "../illustrations/Teenager.svg";
-import { ReactComponent as Adult } from "../illustrations/Adult.svg";
 
 export const personas: Persona[] = [
   {
@@ -11,11 +9,11 @@ export const personas: Persona[] = [
     },
     description: {
       en:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.",
+        "Missing your friends? We feel you! Missing your studies or school? Let’s say we believe you...",
       lt:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod."
+        "Pasiilgai savo draugų? Mes tave suprantame! Pasiilgai studijų ar mokyklos? Apsimesime kad patikėjome..."
     },
-    illustration: Teenager,
+    illustration: "/assets/Teens.png",
     type: UserType.Teen
   },
   {
@@ -25,11 +23,11 @@ export const personas: Persona[] = [
     },
     description: {
       en:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.",
+        "At last! No need to go to the office or wear pants... or both! Be cool and #StayHome",
       lt:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod."
+        "Pagaliau! Nebereikia eiti į ofisą ar dėvėti kelnių... ar abiejų! Ramiai ir #StayHome"
     },
-    illustration: Adult,
+    illustration: "/assets/Adults.png",
     type: UserType.Young
   },
   {
@@ -38,12 +36,11 @@ export const personas: Persona[] = [
       lt: "Vienaragis"
     },
     description: {
-      en:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.",
+      en: "Born wild and free, and want some more? So maybe you are Unicorn?",
       lt:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod."
+        "Esi laisva ir laukinė siela, visoumet sieki kažko daugiau? Galbūt tu - vienaragis?"
     },
-    illustration: Adult,
+    illustration: "/assets/Unicorn.png",
     type: UserType.Family
   }
 ];

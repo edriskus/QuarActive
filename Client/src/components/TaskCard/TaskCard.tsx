@@ -13,6 +13,7 @@ import StatusBlob from "../StatusBlob/StatusBlob";
 import OverDialog from "../OverDialog/OverDialog";
 import { useLocale, local } from "../../utils/Translation";
 import Difficulty from "../Difficulty/Difficulty";
+import { resolveTaskImage } from "../../utils/Task";
 
 interface Props {
   task: Task;
@@ -57,7 +58,7 @@ export default function TaskCard({
   return (
     <Box onClick={openOverlaid}>
       <ImageCard
-        src={task.cover}
+        src={resolveTaskImage(task)}
         key={"imageCard" + task.id}
         overlaid={overlaid && isSmall}
         height={imageHeight}
@@ -69,7 +70,7 @@ export default function TaskCard({
           alignItems="flex-end"
           wrap={"nowrap"}
         >
-          <Grid item={true} xs="auto">
+          <Grid item={true} style={{ flexGrow: 1 }}>
             <Box padding={2} width="100%" paddingTop={minimal ? 0 : 2}>
               <Typography
                 variant={minimal ? "h6" : "h5"}
@@ -85,7 +86,11 @@ export default function TaskCard({
               )}
             </Box>
           </Grid>
-          <Grid item={true} xs={minimal ? 12 : "auto"}>
+          <Grid
+            item={true}
+            xs={minimal ? 12 : "auto"}
+            style={{ maxWidth: minimal ? 50 : 100 }}
+          >
             <Box display="flex" justifyContent="flex-end" width="100%">
               <StatusBlob
                 size={minimal ? 50 : 100}

@@ -6,7 +6,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
     borderRadius: theme.shape.borderRadius,
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,
-    backgroundSize: "contain",
+    backgroundSize: "auto 80%",
     backgroundColor: theme.palette.background.default,
     transition: theme.transitions.create([
       "width",

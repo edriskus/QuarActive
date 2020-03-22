@@ -25,7 +25,7 @@ export default function PersonalityTraitCard({
   onUnselect,
   selected
 }: Props) {
-  const { title, description, type } = trait;
+  const { title, type } = trait;
   const { locale } = useLocale();
 
   const handleSelect = useCallback(() => {
@@ -39,8 +39,20 @@ export default function PersonalityTraitCard({
   return (
     <Card elevation={4}>
       <CardMedia>
-        <Box height={200} display="flex" width="100%" justifyContent="center">
-          <trait.illustration />
+        <Box
+          height={100}
+          display="flex"
+          width="100%"
+          justifyContent="center"
+          padding={2}
+          marginBottom={4}
+        >
+          <img
+            src={trait.illustration}
+            height={100}
+            width="auto"
+            alt={local(title, locale)}
+          />
         </Box>
       </CardMedia>
       <CardContent>
@@ -50,17 +62,7 @@ export default function PersonalityTraitCard({
           </Typography>
         </Box>
         <Box paddingX={2}>
-          <Grid
-            container={true}
-            justify="space-between"
-            wrap="nowrap"
-            spacing={2}
-          >
-            <Grid item={true} xs="auto">
-              <Typography variant="body1" align="left">
-                {local(description, locale)}
-              </Typography>
-            </Grid>
+          <Grid container={true} justify="center" wrap="nowrap" spacing={2}>
             <Grid item={true} xs="auto">
               <Box display="flex" height="100%" alignItems="center">
                 <Fab

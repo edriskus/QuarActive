@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 import { useToken, useAuth, useBalance } from "../../utils/Auth";
 import { ReactComponent as ToiletPaper } from "../../illustrations/ToiletPaper.svg";
 import { useLocale } from "../../utils/Translation";
-import { ReactComponent as Logo } from "../../illustrations/Logo_1.svg";
+import Logo from "../../illustrations/Logo_1.png";
 
 export default function Header() {
   const classes = useStyles();
@@ -58,7 +58,7 @@ export default function Header() {
         <Toolbar>
           <Box className={classes.wrapper}>
             <Typography component={Link} to="/">
-              <Logo height="2rem" />
+              <img src={Logo} height="30px" alt="Logo" />
             </Typography>
             <Box className={classes.centered}>
               {!!token && !emulated && balance != null && (

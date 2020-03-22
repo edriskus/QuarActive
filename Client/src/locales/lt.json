@@ -3,30 +3,33 @@
     "skip": "Vėliau",
     "next": "Pirmyn",
     "finish": "Baigti",
-    "notNow": "Ne dabar"
+    "notNow": "Ne dabar",
+    "or": "arba",
+    "share": "Bendrinti"
   },
   "landing": {
     "stuckInQuarantine": "Užstrigai Karantine?",
-    "storyDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    "challengeAccepted": "Iššūkis priimtas"
+    "storyDescription": "Mes taip pat! Užsimerk, lėtai įkvėpk ir iškvėpk. Jau geriau? Turime tau daug daugiau veiklos kol esi karantine!",
+    "challengeAccepted": "Pradėti"
   },
   "onboarding": {
-    "task1": "Pirma Užduotis",
+    "task1": "Tavo pirma Užduotis!",
     "task1Description": "Papasakok apie save",
-    "task2": "Antra Užduotis",
+    "task1TraitsDescription": "Kokie tavo pomėgiai?",
+    "task2": "Susikurk paskyrą",
     "task2Description": "Įvesk savo el. pašto adresą",
-    "task3": "Trečia užduotis",
-    "task3Description": "Susikurk slaptažodį"
+    "task3": "Paskutinis žingsnis",
+    "task3Description": "Suprantame, kad tai - paslaptis, bet... koks tavo slaptažodis?"
   },
   "login": {
     "title": "Prisijungti",
-    "description": "Prisijungimo aprašymas",
+    "description": "Naudok savo el. pašto adresą ir slaptažodį",
     "email": "El. paštas",
     "password": "Slaptažodis",
     "submit": "Pirmyn"
   },
   "home": {
-    "dailyChallenge": "Koks tavo šiandienos iššūkis?",
+    "dailyChallenge": "Tavo šiandienos iššūkis",
     "moreChallenges": "Turi daugiau laiko?"
   },
   "gdpr": {
@@ -41,6 +44,8 @@
   },
   "task": {
     "congratsYouReceived": "Puiku! Tu gavai",
+    "congratsLoginPlease": "Puiku! Tau reikės užbaigti registraciją kad gautum",
+    "finishRegistration": "Užbaigti registraciją",
     "didYouLike": "Ar patiko šis iššūkis?"
   }
 }

@@ -1,5 +1,4 @@
 import { PersonalityTrait, PersonalityTraitType } from "../types/Persona";
-import { ReactComponent as Adult } from "../illustrations/Adult.svg";
 
 export const personalityTraits: PersonalityTrait[] = [
   {
@@ -13,7 +12,7 @@ export const personalityTraits: PersonalityTrait[] = [
       lt:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod."
     },
-    illustration: Adult,
+    illustration: "/assets/Work-Out.png",
     type: PersonalityTraitType.Fitness
   },
   {
@@ -27,7 +26,7 @@ export const personalityTraits: PersonalityTrait[] = [
       lt:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod."
     },
-    illustration: Adult,
+    illustration: "/assets/Cooking.png",
     type: PersonalityTraitType.Cooking
   },
   {
@@ -41,7 +40,7 @@ export const personalityTraits: PersonalityTrait[] = [
       lt:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod."
     },
-    illustration: Adult,
+    illustration: "/assets/Travel.png",
     type: PersonalityTraitType.Travel
   },
 
@@ -56,7 +55,7 @@ export const personalityTraits: PersonalityTrait[] = [
       lt:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod."
     },
-    illustration: Adult,
+    illustration: "/assets/Education.png",
     type: PersonalityTraitType.Books
   },
 
@@ -71,7 +70,7 @@ export const personalityTraits: PersonalityTrait[] = [
       lt:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod."
     },
-    illustration: Adult,
+    illustration: "/assets/Musician.png",
     type: PersonalityTraitType.Music
   },
 
@@ -86,7 +85,7 @@ export const personalityTraits: PersonalityTrait[] = [
       lt:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod."
     },
-    illustration: Adult,
+    illustration: "/assets/Fun.png",
     type: PersonalityTraitType.Games
   },
 
@@ -101,7 +100,7 @@ export const personalityTraits: PersonalityTrait[] = [
       lt:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod."
     },
-    illustration: Adult,
+    illustration: "/assets/Pets.png",
     type: PersonalityTraitType.Pets
   },
 
@@ -116,7 +115,7 @@ export const personalityTraits: PersonalityTrait[] = [
       lt:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod."
     },
-    illustration: Adult,
+    illustration: "/assets/Time-With-Family.png",
     type: PersonalityTraitType.Kids
   }
 ];

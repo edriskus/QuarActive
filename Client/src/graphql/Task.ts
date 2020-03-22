@@ -1,8 +1,8 @@
 import { gql } from "apollo-boost";
 
 export const getTasks = gql`
-  query getTasks {
-    tasks {
+  query getTasks($traits: [PersonalityTraitEnum!], $type: UserType!) {
+    tasks(traits: $traits, types: [$type]) {
       id
       title {
         lt

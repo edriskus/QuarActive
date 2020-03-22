@@ -1,8 +1,8 @@
 import React from "react";
 import { Difficulty as DifficultyEnum, TaskStatus } from "../../types/Task";
-import { ReactComponent as MediumPaper } from "../../illustrations/MediumPaper.svg";
-import { ReactComponent as HardPaper } from "../../illustrations/HardPaper.svg";
-import { ReactComponent as EasyPaper } from "../../illustrations/EasyPaper.svg";
+import MediumPaper from "../../illustrations/2papers.png";
+import HardPaper from "../../illustrations/3papers.png";
+import EasyPaper from "../../illustrations/1paper.png";
 import { Check } from "@material-ui/icons";
 
 interface Props {
@@ -15,11 +15,11 @@ export default function Difficulty({ difficulty, status }: Props) {
     return <Check style={{ height: "40%", width: "40%" }} />;
   } else {
     return difficulty === DifficultyEnum.easy ? (
-      <EasyPaper height="30%" width="30%" />
+      <img alt="1" src={EasyPaper} height="auto" width="30%" />
     ) : difficulty === DifficultyEnum.medium ? (
-      <MediumPaper height="70%" width="70%" />
+      <img alt="2" src={MediumPaper} height="auto" width="70%" />
     ) : (
-      <HardPaper height="70%" width="70%" />
+      <img alt="3" src={HardPaper} height="auto" width="70%" />
     );
   }
 }

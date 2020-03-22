@@ -13,6 +13,7 @@ import TaskSteps from "../TaskSteps/TaskSteps";
 import { useLocale, local } from "../../utils/Translation";
 import Difficulty from "../Difficulty/Difficulty";
 import { useStyles } from "./ViewTask.styles";
+import { resolveTaskImage } from "../../utils/Task";
 
 interface Props {
   task: Task;
@@ -38,7 +39,7 @@ export default function ViewTask({ task, onClose }: Props) {
       </Box>
       <Hidden smDown={true}>
         <Box display="flex" justifyContent="center" width="100%">
-          <img src={task.cover} height={250} alt={title} />
+          <img src={resolveTaskImage(task)} height={250} alt={title} />
         </Box>
       </Hidden>
       <Typography

@@ -5,3 +5,7 @@ export function sortByStatus(tasks: Task[]) {
     a.status === TaskStatus.done ? 1 : b.status === TaskStatus.done ? -1 : 0
   );
 }
+
+export function resolveTaskImage(task: Task): string {
+  return (task.cover ?? "").replace(".svg", ".png");
+}

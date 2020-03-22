@@ -29,8 +29,20 @@ export default function PersonaCard({ persona, onSelect }: Props) {
   return (
     <Card elevation={4}>
       <CardMedia>
-        <Box height={200} display="flex" width="100%" justifyContent="center">
-          <persona.illustration />
+        <Box
+          height={100}
+          display="flex"
+          width="100%"
+          justifyContent="center"
+          padding={2}
+          marginBottom={4}
+        >
+          <img
+            src={persona.illustration}
+            height={100}
+            width="auto"
+            alt={local(title, locale)}
+          />
         </Box>
       </CardMedia>
       <CardContent>

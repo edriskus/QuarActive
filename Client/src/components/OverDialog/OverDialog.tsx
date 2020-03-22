@@ -18,7 +18,13 @@ export default function OverDialog({ task, open, onClose }: Props) {
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
-      <Box padding={2} paddingTop={0} position="relative" width={960}>
+      <Box
+        padding={2}
+        paddingTop={0}
+        position="relative"
+        width={960}
+        style={{ overflowX: "hidden" }}
+      >
         <ViewTask task={task} onClose={onClose} />
       </Box>
     </Dialog>

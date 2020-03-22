@@ -1,5 +1,4 @@
 import { UserType } from "./Auth";
-import { ComponentType } from "react";
 import { TranslatedString } from "./Translation";
 
 export enum PersonalityTraitType {
@@ -15,14 +14,14 @@ export enum PersonalityTraitType {
 
 export interface PersonalityTrait {
   title: TranslatedString;
-  illustration: ComponentType;
+  illustration: string;
   description: TranslatedString;
   type: PersonalityTraitType;
 }
 
 export interface Persona {
   title: TranslatedString;
-  illustration: ComponentType;
+  illustration: string;
   description: TranslatedString;
   type: UserType;
 }
