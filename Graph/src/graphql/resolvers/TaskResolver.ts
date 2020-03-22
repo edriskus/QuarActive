@@ -9,7 +9,7 @@ import { TaskInput, TranslationInput } from "../inputs";
 import { Translation, Checkpoint, User, UserTypeTask } from "../../entities";
 import { UserCheckpointStatus } from "../../entities/UserCheckpointStatus";
 import { PersonalityTaskTrait } from "../../entities/PersonalityTaskTrait";
-import { In } from 'typeorm';
+import { In, getConnection } from 'typeorm';
 
 @Service()
 @Resolver(() => Task)
@@ -31,7 +31,10 @@ export class TaskResolver {
             taskIds.push(...ids);
         }
 
-        const tasks = await Task.find({ relations: ['checkpoints'], where: filter ? { id: In(taskIds) } : undefined } );
+        const tasks = (await Task.find({ relations: ['checkpoints'], where: filter ? { id: In(taskIds) } : undefined } )).map(task => {
+            task.checkpoints = task.checkpoints.sort((a, b) => a.order - b.order);
+            return task;
+        });
         return tasks;
     }
 
