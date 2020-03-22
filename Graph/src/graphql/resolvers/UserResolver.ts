@@ -28,7 +28,6 @@ export class UserResolver {
   @Query(() => [User])
   async getUsers() {
     const users = await this.userService.getUsers();
-    console.log(users);
     return users;
   }
 

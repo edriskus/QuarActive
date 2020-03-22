@@ -9,6 +9,7 @@ import { TaskInput } from "../inputs";
 import { Translation, Checkpoint, User, UserTypeTask } from "../../entities";
 import { UserCheckpointStatus } from "../../entities/UserCheckpointStatus";
 import { PersonalityTaskTrait } from "../../entities/PersonalityTaskTrait";
+import { In } from 'typeorm';
 
 @Service()
 @Resolver(() => Task)
@@ -16,8 +17,21 @@ export class TaskResolver {
     constructor() { }
 
     @Query(() => [Task])
-    async tasks() {
-        const tasks = await Task.find({ relations: ['checkpoints'] });
+    async tasks(@Arg("types", () => [UserType], { nullable: true }) types: UserType[], @Arg("traits", () => [PersonalityTraitEnum], { nullable: true }) traits: PersonalityTraitEnum[]) {
+        const taskIds = [];
+        let filter = types !== undefined || traits !== undefined;
+
+        if (types) {
+            const ids = (await UserTypeTask.find({ where: { userType: In(types) } })).map(t => t.taskId);
+            taskIds.push(...ids);
+        }
+
+        if (traits) {
+            const ids = (await PersonalityTaskTrait.find({ where: { personalityTrait: In(traits) } })).map(t => t.taskId);
+            taskIds.push(...ids);
+        }
+
+        const tasks = await Task.find({ relations: ['checkpoints'], where: filter ? { id: In(taskIds) } : undefined });
         return tasks;
     }
 
