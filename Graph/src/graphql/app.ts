@@ -4,19 +4,28 @@ import { ApolloServer } from 'apollo-server';
 import { createSchema, contextMiddleware, disposeScopedContainer } from './helpers';
 
 (async () => {
-    await createConnection();
+    const url = process.env.DATABASE_URL || 'postgres://postgres:postgres@localhost:5432/quaractive';
+    await createConnection({
+        type: "postgres",
+        url,
+        entities: ["./src/entities/*.ts"],
+        synchronize: true
+    });
 
     const schema = await createSchema();
     const server = new ApolloServer({
         schema,
         debug: false,
+        introspection: true,
+        playground: true,
         context: contextMiddleware,
         plugins: [disposeScopedContainer],
     });
 
-    server.listen({ port: 4000 }, () =>
+    const port = process.env.PORT || 4000;
+    server.listen({ port }, () =>
         console.log(
-            `Server ready at http://localhost:4000${server.graphqlPath}`
+            `Server ready at http://localhost:${port}${server.graphqlPath}`
         )
     );
 })();

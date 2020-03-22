@@ -1,4 +1,5 @@
 import { InputType, Field } from "type-graphql";
+import { UserType, PersonalityTraitEnum } from "../../entities/enums";
 
 @InputType()
 export class RegisterInput {
@@ -10,4 +11,10 @@ export class RegisterInput {
 
   @Field()
   displayName: string;
+
+  @Field(() => UserType)
+  type: UserType;
+
+  @Field(() => [PersonalityTraitEnum])
+  personalityTraits: PersonalityTraitEnum[];
 }

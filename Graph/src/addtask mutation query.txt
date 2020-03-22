@@ -1,0 +1,49 @@
+mutation {
+  addTask(
+    data: {
+      title: { lt: "lt title", en: "en title" }
+      description: { lt: "lt description", en: "en description" }
+      amount: 15
+      difficulty: Medium
+      checkpoints: [
+        {
+          title: { en: "first cp en title", lt: "first cp lt title" }
+          description: { en: "first cp en desc", lt: "first cp lt desc" 				}
+        },
+        {
+          title: { en: "second cp en title", lt: "second cp lt title" }
+          description: { en: "second cp en desc", lt: "second cp lt desc" 				}
+        },
+        {
+          title: { en: "third cp en title", lt: "third cp lt title" }
+          description: { en: "third cp en desc", lt: "third cp lt desc" 				}
+        }
+      ]
+    }
+  ) {
+    id
+    title {
+      lt
+      en
+    }
+    description {
+      lt
+      en
+    }
+    amount
+    difficulty
+    status
+    checkpoints {
+      id
+      title {
+        lt
+        en
+      }
+      description {
+        lt
+        en
+      }
+      status
+    }
+  }
+}
