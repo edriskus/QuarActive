@@ -1,6 +1,14 @@
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { Container, Typography, Box, Grid, Button } from "@material-ui/core";
+import {
+  Container,
+  Typography,
+  Box,
+  Grid,
+  Button,
+  useMediaQuery,
+  useTheme
+} from "@material-ui/core";
 import { personas } from "../../data/Persona";
 import { personalityTraits } from "../../data/PersonalityTrait";
 import PersonaCard from "../../components/PersonaCard/PersonaCard";
@@ -52,6 +60,9 @@ export default function OnboardPersona({
     onNext();
   }, [onNext]);
 
+  const theme = useTheme();
+  const isMd = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
     <Container>
       <Typography
@@ -65,7 +76,7 @@ export default function OnboardPersona({
       <Box
         display="flex"
         justifyContent="center"
-        marginTop={4}
+        marginTop={3}
         marginBottom={2}
         marginX={3}
       >
@@ -87,7 +98,7 @@ export default function OnboardPersona({
         <>
           <Grid container={true} spacing={3} justify="center">
             {personalityTraits.map((trait, key) => (
-              <Grid item={true} xs={12} sm={6} md={4} key={key}>
+              <Grid item={true} xs={12} sm={6} md={4} lg={3} key={key}>
                 <PersonalityTraitCard
                   trait={trait}
                   onSelect={handleTraitSelect}
@@ -97,10 +108,11 @@ export default function OnboardPersona({
               </Grid>
             ))}
           </Grid>
-          <Box display="flex" width="100%" justifyContent="center" paddingY={3}>
+          <Box display="flex" width="100%" justifyContent="center" padding={3}>
             <Button
               variant="contained"
-              color="secondary"
+              color="primary"
+              fullWidth={isMd}
               onClick={handleTraitsSubmit}
             >
               {t("common.next")}

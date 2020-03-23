@@ -15,6 +15,7 @@ import { useToken, useAuth, useBalance } from "../../utils/Auth";
 import { ReactComponent as ToiletPaper } from "../../illustrations/ToiletPaper.svg";
 import { useLocale } from "../../utils/Translation";
 import Logo from "../../illustrations/Logo_1.png";
+import { Locale } from "../../types/Translation";
 
 export default function Header() {
   const classes = useStyles();
@@ -42,10 +43,24 @@ export default function Header() {
 
   const handleLocaleClose = useCallback(() => setLocaleAnchor(null), []);
 
+  const handleSetLocale = useCallback(
+    (locale: Locale) => () => {
+      setLocale(locale);
+      handleLocaleClose();
+    },
+    [handleLocaleClose, setLocale]
+  );
+
   const handleLogout = useCallback(() => {
     clearAuth();
     handleClose();
   }, [clearAuth, handleClose]);
+
+  const handleLogoClick = useCallback(() => {
+    if (auth?.emulated) {
+      clearAuth();
+    }
+  }, [auth, clearAuth]);
 
   return (
     <>
@@ -58,7 +73,12 @@ export default function Header() {
         <Toolbar>
           <Box className={classes.wrapper}>
             <Typography component={Link} to="/">
-              <img src={Logo} height="30px" alt="Logo" />
+              <img
+                src={Logo}
+                height="30px"
+                alt="Logo"
+                onClick={handleLogoClick}
+              />
             </Typography>
             <Box className={classes.centered}>
               {!!token && !emulated && balance != null && (
@@ -90,8 +110,8 @@ export default function Header() {
                 open={Boolean(localeAnchor)}
                 onClose={handleLocaleClose}
               >
-                <MenuItem onClick={() => setLocale("lt")}>LT</MenuItem>
-                <MenuItem onClick={() => setLocale("en")}>EN</MenuItem>
+                <MenuItem onClick={handleSetLocale("lt")}>LT</MenuItem>
+                <MenuItem onClick={handleSetLocale("en")}>EN</MenuItem>
               </Menu>
               {!!token && !emulated && (
                 <>

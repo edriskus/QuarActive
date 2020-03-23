@@ -71,7 +71,12 @@ export default function TaskCard({
           wrap={"nowrap"}
         >
           <Grid item={true} style={{ flexGrow: 1 }}>
-            <Box padding={2} width="100%" paddingTop={minimal ? 0 : 2}>
+            <Box
+              padding={2}
+              width="100%"
+              paddingY={minimal ? 0 : 2}
+              minHeight={minimal ? 50 : undefined}
+            >
               <Typography
                 variant={minimal ? "h6" : "h5"}
                 color="primary"

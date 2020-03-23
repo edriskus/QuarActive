@@ -69,69 +69,76 @@ export default function OnboardEmail({
 
   return (
     <Container maxWidth="sm">
-      <Typography
-        align="center"
-        variant="h3"
-        gutterBottom={true}
-        color="primary"
-      >
-        {t("onboarding.task2")}
-      </Typography>
-      <Box
-        display="flex"
-        justifyContent="center"
-        marginTop={4}
-        marginBottom={2}
-        marginX={3}
-      >
-        <Typography align="center" variant="body1" gutterBottom={true}>
-          {t("onboarding.task2Description")}
+      <Box paddingX={3} paddingTop={7}>
+        <Typography
+          align="center"
+          variant="h3"
+          gutterBottom={true}
+          color="primary"
+        >
+          {t("onboarding.task2")}
         </Typography>
-      </Box>
-      <form onSubmit={handleSubmit}>
-        <TextField
-          value={email}
-          margin="normal"
-          error={!!emailError}
-          helperText={emailError}
-          placeholder={t("login.email")}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start" color="textSecondary">
-                <AlternateEmail />
-              </InputAdornment>
-            )
-          }}
-          fullWidth={true}
-          variant="outlined"
-          onChange={handleChange(setEmail)}
-        />
-        <Box display="flex" justifyContent="center" width="100%" marginTop={4}>
-          <Grid container={true} spacing={3}>
-            <Grid item={true} xs={6}>
-              <Button
-                type="submit"
-                variant="contained"
-                color="secondary"
-                fullWidth={true}
-              >
-                {t("common.next")}
-              </Button>
-            </Grid>
-            <Grid item={true} xs={6}>
-              <Button
-                type="button"
-                variant="outlined"
-                color="primary"
-                fullWidth={true}
-                onClick={handleSkip}
-              >
-                {t("common.skip")}
-              </Button>
-            </Grid>
-          </Grid>
+        <Box
+          display="flex"
+          justifyContent="center"
+          marginTop={3}
+          marginBottom={2}
+          marginX={3}
+        >
+          <Typography align="center" variant="body1" gutterBottom={true}>
+            {t("onboarding.task2Description")}
+          </Typography>
         </Box>
-      </form>
+        <form onSubmit={handleSubmit}>
+          <TextField
+            value={email}
+            margin="normal"
+            error={!!emailError}
+            helperText={emailError}
+            placeholder={t("login.email")}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start" color="textSecondary">
+                  <AlternateEmail />
+                </InputAdornment>
+              )
+            }}
+            fullWidth={true}
+            variant="outlined"
+            onChange={handleChange(setEmail)}
+          />
+          <Box
+            display="flex"
+            justifyContent="center"
+            width="100%"
+            marginTop={3}
+          >
+            <Grid container={true} spacing={3}>
+              <Grid item={true} xs={6}>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  fullWidth={true}
+                >
+                  {t("common.next")}
+                </Button>
+              </Grid>
+              <Grid item={true} xs={6}>
+                <Button
+                  type="button"
+                  variant="outlined"
+                  color="primary"
+                  fullWidth={true}
+                  onClick={handleSkip}
+                >
+                  {t("common.skip")}
+                </Button>
+              </Grid>
+            </Grid>
+          </Box>
+        </form>
+      </Box>
     </Container>
   );
 }

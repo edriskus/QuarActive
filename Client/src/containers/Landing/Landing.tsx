@@ -23,6 +23,7 @@ export default function Landing() {
       <Box
         display="flex"
         width="100%"
+        paddingX={isMd ? 3 : 0}
         alignItems="center"
         height={isMd ? "auto" : "calc(100vh - 128px)"}
       >
@@ -32,7 +33,7 @@ export default function Landing() {
               display="flex"
               justifyContent="center"
               width="100%"
-              height={isMd ? 165 : 460}
+              height={isMd ? 197 : 492}
               paddingY={4}
               marginTop={2}
               paddingX={4}
@@ -41,42 +42,50 @@ export default function Landing() {
             </Box>
           </Grid>
           <Grid item={true} xs={12} md={5}>
-            <Typography
-              align={isMd ? "center" : "right"}
-              variant={isMd ? "h3" : "h2"}
-              gutterBottom={true}
-              color="primary"
-            >
-              {t("landing.stuckInQuarantine")}
-            </Typography>
             <Box
               display="flex"
-              justifyContent={isMd ? "center" : "flex-end"}
-              marginTop={4}
-              marginX={isMd ? 3 : 0}
+              flexDirection="column"
+              justifyContent="center"
+              height="100%"
             >
               <Typography
                 align={isMd ? "center" : "right"}
-                variant="body1"
+                variant={isMd ? "h3" : "h2"}
                 gutterBottom={true}
-              >
-                {t("landing.storyDescription")}
-              </Typography>
-            </Box>
-            <Box
-              display="flex"
-              justifyContent={isMd ? "center" : "flex-end"}
-              width="100%"
-              marginTop={6}
-            >
-              <Button
-                variant="contained"
                 color="primary"
-                component={Link}
-                to="/onboarding"
               >
-                {t("landing.challengeAccepted")}
-              </Button>
+                {t("landing.stuckInQuarantine")}
+              </Typography>
+              <Box
+                display="flex"
+                justifyContent={isMd ? "center" : "flex-end"}
+                marginTop={4}
+              >
+                <Typography
+                  align={isMd ? "center" : "right"}
+                  variant="body1"
+                  gutterBottom={true}
+                  dangerouslySetInnerHTML={{
+                    __html: t("landing.storyDescription")
+                  }}
+                />
+              </Box>
+              <Box
+                display="flex"
+                justifyContent={isMd ? "center" : "flex-end"}
+                width="100%"
+                marginTop={6}
+              >
+                <Button
+                  variant="contained"
+                  color="primary"
+                  fullWidth={isMd}
+                  component={Link}
+                  to="/onboarding"
+                >
+                  {t("landing.challengeAccepted")}
+                </Button>
+              </Box>
             </Box>
           </Grid>
         </Grid>

@@ -1,5 +1,7 @@
 import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
 
+const baseTheme = createMuiTheme();
+
 export default responsiveFontSizes(
   createMuiTheme({
     palette: {
@@ -52,6 +54,20 @@ export default responsiveFontSizes(
         },
         outlined: {
           padding: "13px 26px"
+        },
+        contained: {
+          boxShadow: baseTheme.shadows[4]
+        },
+        containedPrimary: {
+          background:
+            "linear-gradient(100.46deg, #ABD8C9 43.96%, #B879C5 107.92%)"
+        },
+        outlinedPrimary: {
+          border: `2px solid #B879C5`,
+          padding: "12px 26px",
+          "&:focus, &:hover": {
+            border: `2px solid #B879C5`
+          }
         }
       },
       MuiStepper: {

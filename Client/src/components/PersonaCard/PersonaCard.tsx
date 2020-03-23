@@ -6,7 +6,8 @@ import {
   Box,
   Typography,
   Grid,
-  Fab
+  Fab,
+  CardActionArea
 } from "@material-ui/core";
 import { Persona } from "../../types/Persona";
 import { UserType } from "../../types/Auth";
@@ -28,51 +29,53 @@ export default function PersonaCard({ persona, onSelect }: Props) {
 
   return (
     <Card elevation={4}>
-      <CardMedia>
-        <Box
-          height={100}
-          display="flex"
-          width="100%"
-          justifyContent="center"
-          padding={2}
-          marginBottom={4}
-        >
-          <img
-            src={persona.illustration}
+      <CardActionArea onClick={handleSelect}>
+        <CardMedia>
+          <Box
             height={100}
-            width="auto"
-            alt={local(title, locale)}
-          />
-        </Box>
-      </CardMedia>
-      <CardContent>
-        <Box marginBottom={3}>
-          <Typography variant="h4" color="primary" align="center">
-            {local(title, locale)}
-          </Typography>
-        </Box>
-        <Box paddingX={2}>
-          <Grid
-            container={true}
-            justify="space-between"
-            wrap="nowrap"
-            spacing={2}
+            display="flex"
+            width="100%"
+            justifyContent="center"
+            padding={2}
+            marginBottom={4}
           >
-            <Grid item={true} xs="auto">
-              <Typography variant="body1" align="left">
-                {local(description, locale)}
-              </Typography>
+            <img
+              src={persona.illustration}
+              height={100}
+              width="auto"
+              alt={local(title, locale)}
+            />
+          </Box>
+        </CardMedia>
+        <CardContent>
+          <Box marginBottom={3}>
+            <Typography variant="h4" color="primary" align="center">
+              {local(title, locale)}
+            </Typography>
+          </Box>
+          <Box paddingX={2}>
+            <Grid
+              container={true}
+              justify="space-between"
+              wrap="nowrap"
+              spacing={2}
+            >
+              <Grid item={true} xs="auto">
+                <Typography variant="body1" align="left">
+                  {local(description, locale)}
+                </Typography>
+              </Grid>
+              <Grid item={true} xs="auto">
+                <Box display="flex" height="100%" alignItems="center">
+                  <Fab color="secondary" aria-label="next">
+                    <ArrowForward />
+                  </Fab>
+                </Box>
+              </Grid>
             </Grid>
-            <Grid item={true} xs="auto">
-              <Box display="flex" height="100%" alignItems="center">
-                <Fab color="secondary" aria-label="next" onClick={handleSelect}>
-                  <ArrowForward />
-                </Fab>
-              </Box>
-            </Grid>
-          </Grid>
-        </Box>
-      </CardContent>
+          </Box>
+        </CardContent>
+      </CardActionArea>
     </Card>
   );
 }

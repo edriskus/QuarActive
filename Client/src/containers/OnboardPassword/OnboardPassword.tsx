@@ -57,66 +57,73 @@ export default function OnboardPassword({
 
   return (
     <Container maxWidth="sm">
-      <Typography
-        align="center"
-        variant="h3"
-        gutterBottom={true}
-        color="primary"
-      >
-        {t("onboarding.task3")}
-      </Typography>
-      <Box
-        display="flex"
-        justifyContent="center"
-        marginTop={4}
-        marginBottom={2}
-        marginX={3}
-      >
-        <Typography align="center" variant="body1" gutterBottom={true}>
-          {t("onboarding.task3Description")}
+      <Box paddingX={3} paddingTop={7}>
+        <Typography
+          align="center"
+          variant="h3"
+          gutterBottom={true}
+          color="primary"
+        >
+          {t("onboarding.task3")}
         </Typography>
-      </Box>
-      <form onSubmit={handleSubmit}>
-        <TextField
-          value={password}
-          margin="normal"
-          error={!!passwordError}
-          helperText={passwordError}
-          type="password"
-          placeholder={t("login.password")}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start" color="textSecondary">
-                <LockOutlined />
-              </InputAdornment>
-            )
-          }}
-          fullWidth={true}
-          variant="outlined"
-          onChange={handleChange(setPassword)}
-        />
-        <Box display="flex" justifyContent="center" width="100%" marginTop={4}>
-          <Grid container={true} spacing={3}>
-            <Grid item={true} xs={12}>
-              <GraphErrors error={error} />
-              <Box display="flex" justifyContent="center" width="100%">
-                {loading ? (
-                  <CircularProgress />
-                ) : (
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="secondary"
-                    fullWidth={true}
-                  >
-                    {t("common.finish")}
-                  </Button>
-                )}
-              </Box>
-            </Grid>
-          </Grid>
+        <Box
+          display="flex"
+          justifyContent="center"
+          marginTop={3}
+          marginBottom={2}
+          marginX={3}
+        >
+          <Typography align="center" variant="body1" gutterBottom={true}>
+            {t("onboarding.task3Description")}
+          </Typography>
         </Box>
-      </form>
+        <form onSubmit={handleSubmit}>
+          <TextField
+            value={password}
+            margin="normal"
+            error={!!passwordError}
+            helperText={passwordError}
+            type="password"
+            placeholder={t("login.password")}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start" color="textSecondary">
+                  <LockOutlined />
+                </InputAdornment>
+              )
+            }}
+            fullWidth={true}
+            variant="outlined"
+            onChange={handleChange(setPassword)}
+          />
+          <Box
+            display="flex"
+            justifyContent="center"
+            width="100%"
+            marginTop={3}
+          >
+            <Grid container={true} spacing={3}>
+              <Grid item={true} xs={12}>
+                <GraphErrors error={error} />
+                <Box display="flex" justifyContent="center" width="100%">
+                  {loading ? (
+                    <CircularProgress />
+                  ) : (
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      color="primary"
+                      fullWidth={true}
+                    >
+                      {t("common.finish")}
+                    </Button>
+                  )}
+                </Box>
+              </Grid>
+            </Grid>
+          </Box>
+        </form>
+      </Box>
     </Container>
   );
 }

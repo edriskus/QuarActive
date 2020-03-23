@@ -38,7 +38,7 @@ export default function ViewTask({ task, onClose }: Props) {
         <TaskActions onClose={onClose} />
       </Box>
       <Hidden smDown={true}>
-        <Box display="flex" justifyContent="center" width="100%">
+        <Box display="flex" justifyContent="center" width="100%" paddingY={4}>
           <img src={resolveTaskImage(task)} height={250} alt={title} />
         </Box>
       </Hidden>
