@@ -10,6 +10,9 @@ import { sortByStatus } from "../../utils/Task";
 import { useAuth } from "../../utils/Auth";
 import BackgroundRibbon from "../../components/BackgroundRibbon/BackgroundRibbon";
 import CardSkeleton from "../../components/CardSkeleton/CardSkeleton";
+import Quiz from "../Quiz/Quiz";
+import { HowAreYou, HealthCheckQuestions } from "../../data/HealthCheck";
+import { useDailyHealth } from "../../utils/DailyHealth";
 
 export default function Home() {
   const params = useParams<{ taskId?: string }>();
@@ -41,6 +44,18 @@ export default function Home() {
   }, []);
 
   const { t } = useTranslation();
+  const { show, complete } = useDailyHealth();
+
+  if (show) {
+    return (
+      <Quiz
+        initialQuestion={HowAreYou}
+        complete={complete}
+        questionMap={HealthCheckQuestions}
+      />
+    );
+  }
+
   return (
     <Container maxWidth="md">
       <Box paddingY={3}>

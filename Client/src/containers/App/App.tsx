@@ -9,22 +9,25 @@ import Header from "../../components/Header/Header";
 import { AuthProvider } from "../../utils/Auth";
 import CookieBar from "../CookieBar/CookieBar";
 import { LocaleProvider } from "../../utils/Translation";
+import { DailyHealthProvider } from "../../utils/DailyHealth";
 
 function App() {
   return (
     <LocaleProvider>
       <ApolloProvider client={client}>
         <AuthProvider>
-          <ThemeProvider theme={LightTheme}>
-            <CssBaseline />
-            <Router>
-              <Header />
-              <Box paddingBottom={6}>
-                <Routes />
-              </Box>
-              <CookieBar />
-            </Router>
-          </ThemeProvider>
+          <DailyHealthProvider>
+            <ThemeProvider theme={LightTheme}>
+              <CssBaseline />
+              <Router>
+                <Header />
+                <Box paddingBottom={6}>
+                  <Routes />
+                </Box>
+                <CookieBar />
+              </Router>
+            </ThemeProvider>
+          </DailyHealthProvider>
         </AuthProvider>
       </ApolloProvider>
     </LocaleProvider>
