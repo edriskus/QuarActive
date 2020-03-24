@@ -16,6 +16,7 @@ import { useAuth, emulateAuth } from "../../utils/Auth";
 import { UserType } from "../../types/Auth";
 import { useHistory } from "react-router-dom";
 import { PersonalityTraitType } from "../../types/Persona";
+import { useDailyHealth } from "../../utils/DailyHealth";
 
 interface Props {
   initialValue?: string;
@@ -40,6 +41,7 @@ export default function OnboardEmail({
   const { t } = useTranslation();
   const { push } = useHistory();
   const { setAuth } = useAuth();
+  const { complete } = useDailyHealth();
   const [email, setEmail] = useState(initialValue ?? "");
   const [errors, setErrors] = useState<yup.ValidationError[]>([]);
 
@@ -60,10 +62,11 @@ export default function OnboardEmail({
 
   const handleSkip = useCallback(() => {
     if (type && (traits?.length ?? 0) > 0) {
+      complete();
       setAuth(emulateAuth(type, traits ?? []));
       push("/");
     }
-  }, [push, setAuth, traits, type]);
+  }, [complete, push, setAuth, traits, type]);
 
   const emailError = findError(errors, "email")?.message;
 

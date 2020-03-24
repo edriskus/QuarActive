@@ -9,9 +9,11 @@ import { useMutation } from "@apollo/react-hooks";
 import { useAuth } from "../../utils/Auth";
 import { register } from "../../graphql/Auth";
 import { PersonalityTraitType } from "../../types/Persona";
+import { useDailyHealth } from "../../utils/DailyHealth";
 
 export default function Onboarding() {
   const { auth, setAuth } = useAuth();
+  const { complete } = useDailyHealth();
   const [type, setType] = useState<UserType | undefined>(
     auth?.user?.type ?? undefined
   );
@@ -40,6 +42,7 @@ export default function Onboarding() {
 
   const [doRegister, { loading, error }] = useMutation(register, {
     onCompleted: ({ register }: { register: Auth }) => {
+      complete();
       setAuth(register);
     }
   });
