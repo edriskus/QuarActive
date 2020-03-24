@@ -81,7 +81,7 @@ export function useCompleteCheckpoint(
   });
 
   const handleComplete = useCallback(() => {
-    if (!emulated) {
+    if (!emulated && !task.offline) {
       doChangeTask({
         variables: {
           status: TaskStatus.done,
@@ -91,13 +91,20 @@ export function useCompleteCheckpoint(
     } else {
       setActiveStep(activeStep + 1);
     }
-  }, [activeStep, doChangeTask, emulated, setActiveStep, task.id]);
+  }, [
+    activeStep,
+    doChangeTask,
+    emulated,
+    setActiveStep,
+    task.id,
+    task.offline
+  ]);
 
   const handleNext = useCallback(() => {
     if (activeStep <= lastCompleteStep) {
       setActiveStep(activeStep + 1);
     } else {
-      if (!emulated) {
+      if (!emulated && !task.offline) {
         doChangeCheckpoint({
           variables: {
             status: CheckpointStatus.done,
@@ -107,7 +114,7 @@ export function useCompleteCheckpoint(
       } else {
         setActiveStep(activeStep + 1);
       }
-      if (activeStep === checkpoints.length - 1 && !emulated) {
+      if (activeStep === checkpoints.length - 1 && !emulated && !task.offline) {
         doChangeTask({
           variables: {
             status: TaskStatus.done,
@@ -125,7 +132,8 @@ export function useCompleteCheckpoint(
     doChangeCheckpoint,
     step,
     doChangeTask,
-    task.id
+    task.id,
+    task.offline
   ]);
   return {
     loading,

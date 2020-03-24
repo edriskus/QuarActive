@@ -62,7 +62,11 @@ export default function ViewTask({ task, onClose }: Props) {
           placementY="top"
           margin={-4}
         >
-          <Difficulty difficulty={task.difficulty} status={task.status} />
+          <Difficulty
+            difficulty={task.difficulty}
+            status={task.status}
+            priority={task.offline}
+          />
         </StatusBlob>
       </Box>
       <TaskSteps task={task} />

@@ -3,16 +3,19 @@ import { Difficulty as DifficultyEnum, TaskStatus } from "../../types/Task";
 import MediumPaper from "../../illustrations/2papers.png";
 import HardPaper from "../../illustrations/3papers.png";
 import EasyPaper from "../../illustrations/1paper.png";
-import { Check } from "@material-ui/icons";
+import { Check, PriorityHigh } from "@material-ui/icons";
 
 interface Props {
-  difficulty: DifficultyEnum;
+  priority?: boolean;
   status?: TaskStatus;
+  difficulty: DifficultyEnum;
 }
 
-export default function Difficulty({ difficulty, status }: Props) {
+export default function Difficulty({ difficulty, status, priority }: Props) {
   if (status === TaskStatus.done) {
     return <Check style={{ height: "40%", width: "40%" }} />;
+  } else if (priority) {
+    return <PriorityHigh style={{ height: "40%", width: "40%" }} />;
   } else {
     return difficulty === DifficultyEnum.easy ? (
       <img alt="1" src={EasyPaper} height="auto" width="30%" />

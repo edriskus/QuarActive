@@ -104,7 +104,11 @@ export default function TaskCard({
                 margin={minimal ? -1 : -3}
                 padding={minimal ? 0.5 : 2}
               >
-                <Difficulty difficulty={task.difficulty} status={task.status} />
+                <Difficulty
+                  difficulty={task.difficulty}
+                  status={task.status}
+                  priority={task.offline}
+                />
               </StatusBlob>
             </Box>
           </Grid>

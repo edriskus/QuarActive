@@ -11,13 +11,19 @@ import { useAuth } from "../../utils/Auth";
 import BackgroundRibbon from "../../components/BackgroundRibbon/BackgroundRibbon";
 import CardSkeleton from "../../components/CardSkeleton/CardSkeleton";
 import Quiz from "../Quiz/Quiz";
-import { HowAreYou, HealthCheckQuestions } from "../../data/HealthCheck";
+import {
+  HowAreYou,
+  HealthCheckQuestions,
+  HealthCheckTask
+} from "../../data/HealthCheck";
 import { useDailyHealth } from "../../utils/DailyHealth";
+import ScrollTop from "../../components/ScrollTop/ScrollTop";
 
 export default function Home() {
   const params = useParams<{ taskId?: string }>();
   const { replace } = useHistory();
   const { auth } = useAuth();
+  const [staticTasks, setStaticTasks] = useState<Task[]>([]);
   const [selectedId, setSelectedId] = useState(params?.taskId);
   const { data } = useQuery<{ tasks: Task[] }>(getTasks, {
     variables: {
@@ -26,14 +32,20 @@ export default function Home() {
     }
   });
 
-  const sortedData = sortByStatus(data?.tasks ?? []);
+  const sortedData = sortByStatus(staticTasks.concat(data?.tasks ?? []));
   const featuredTask = sortedData?.[0];
   const moreTasks = sortedData?.slice(1) ?? [];
 
   useEffect(() => {
     replace("/");
+    if (!!params?.taskId) {
+      setSelectedId(params?.taskId);
+    }
+    if (params?.taskId === "checkHealth") {
+      setStaticTasks([HealthCheckTask]);
+    }
     // eslint-disable-next-line
-  }, [])
+  }, [params?.taskId])
 
   const handleOpen = useCallback((id: string) => {
     setSelectedId(id);
@@ -58,6 +70,7 @@ export default function Home() {
 
   return (
     <Container maxWidth="md">
+      <ScrollTop />
       <Box paddingY={3}>
         <Typography align="center" variant="h3" color="primary">
           {t("home.dailyChallenge")}

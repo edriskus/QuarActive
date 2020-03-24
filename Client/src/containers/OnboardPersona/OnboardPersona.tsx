@@ -15,6 +15,7 @@ import PersonaCard from "../../components/PersonaCard/PersonaCard";
 import PersonalityTraitCard from "../../components/PersonalityTraitCard/PersonalityTraitCard";
 import { UserType } from "../../types/Auth";
 import { PersonalityTraitType } from "../../types/Persona";
+import ScrollTop from "../../components/ScrollTop/ScrollTop";
 
 interface Props {
   type?: UserType;
@@ -42,8 +43,6 @@ export default function OnboardPersona({
 
   const handleTraitSelect = useCallback(
     (trait: PersonalityTraitType) => {
-      console.log(traits, [...(traits ?? []), trait]);
-
       onTraitsChange([...(traits ?? []), trait]);
     },
     [onTraitsChange, traits]
@@ -88,6 +87,7 @@ export default function OnboardPersona({
       </Box>
       {!type ? (
         <Grid container={true} spacing={3} justify="center">
+          <ScrollTop />
           {personas.map((persona, key) => (
             <Grid item={true} xs={12} sm={6} md={4} key={key}>
               <PersonaCard persona={persona} onSelect={handleTypeSelect} />
@@ -96,6 +96,7 @@ export default function OnboardPersona({
         </Grid>
       ) : (
         <>
+          <ScrollTop />
           <Grid container={true} spacing={3} justify="center">
             {personalityTraits.map((trait, key) => (
               <Grid item={true} xs={12} sm={6} md={4} lg={3} key={key}>

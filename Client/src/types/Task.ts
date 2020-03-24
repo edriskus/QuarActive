@@ -22,6 +22,7 @@ export interface Task {
   id: string;
   title: TranslatedString;
   cover: string;
+  offline?: boolean;
   description: TranslatedString; // In markdown
   difficulty: Difficulty;
   checkpoints: Checkpoint[];
