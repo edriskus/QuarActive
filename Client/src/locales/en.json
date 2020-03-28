@@ -38,14 +38,21 @@
     "agree": "Accept"
   },
   "difficulty": {
-    "easy": "easy",
-    "medium": "medium",
-    "hard": "hard"
+    "Easy": "Easy",
+    "Medium": "Medium",
+    "Hard": "Hard"
+  },
+  "admin": {
+    "allTasks": "All Tasks"
   },
   "task": {
     "congratsYouReceived": "Congrats! You received",
     "congratsLoginPlease": "Congrats! Please finish your registration to receive",
     "finishRegistration": "Finish registration",
-    "didYouLike": "Did you like this challenge?"
+    "didYouLike": "Did you like this challenge?",
+    "title": "Title",
+    "difficulty": "Difficulty",
+    "checkpoints": "Checkpoints",
+    "edit": "Edit"
   }
 }

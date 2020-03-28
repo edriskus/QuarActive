@@ -64,6 +64,14 @@ export const useToken = () => {
   return auth?.token;
 };
 
+export const useRole = () => {
+  const { auth } = useAuth();
+  return {
+    // TODO
+    admin: auth?.token && !auth.emulated
+  };
+};
+
 export const useBalance = () => {
   const { auth } = useAuth();
   return auth?.user?.balance;

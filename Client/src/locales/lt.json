@@ -38,14 +38,21 @@
     "agree": "Priimti"
   },
   "difficulty": {
-    "easy": "lengvas",
-    "medium": "vidutinis",
-    "hard": "sunkus"
+    "Easy": "Lengvas",
+    "Medium": "Vidutinis",
+    "Hard": "Sunkus"
+  },
+  "admin": {
+    "allTasks": "All Tasks"
   },
   "task": {
     "congratsYouReceived": "Puiku! Tu gavai",
     "congratsLoginPlease": "Puiku! Tau reikės užbaigti registraciją kad gautum",
     "finishRegistration": "Užbaigti registraciją",
-    "didYouLike": "Ar patiko šis iššūkis?"
+    "didYouLike": "Ar patiko šis iššūkis?",
+    "title": "Pavadinimas",
+    "difficulty": "Sudėtingumas",
+    "checkpoints": "Žingsniai",
+    "edit": "Keisti"
   }
 }

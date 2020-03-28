@@ -11,7 +11,7 @@ import {
 import { useStyles } from "./Header.styles";
 import { VpnKeyOutlined, AccountCircleOutlined } from "@material-ui/icons";
 import { Link } from "react-router-dom";
-import { useToken, useAuth, useBalance } from "../../utils/Auth";
+import { useToken, useAuth, useBalance, useRole } from "../../utils/Auth";
 import { ReactComponent as ToiletPaper } from "../../illustrations/ToiletPaper.svg";
 import { useLocale } from "../../utils/Translation";
 import Logo from "../../illustrations/Logo_1.png";
@@ -25,6 +25,7 @@ export default function Header() {
   const balance = useBalance();
 
   const { locale, setLocale } = useLocale();
+  const { admin } = useRole();
 
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const [localeAnchor, setLocaleAnchor] = useState<HTMLButtonElement | null>(
@@ -131,6 +132,15 @@ export default function Header() {
                     open={Boolean(anchorEl)}
                     onClose={handleClose}
                   >
+                    {!!admin && (
+                      <MenuItem
+                        onClick={handleClose}
+                        component={Link}
+                        to="/admin"
+                      >
+                        Edit Tasks
+                      </MenuItem>
+                    )}
                     <MenuItem onClick={handleClose}>Profile</MenuItem>
                     <MenuItem onClick={handleLogout}>Logout</MenuItem>
                   </Menu>

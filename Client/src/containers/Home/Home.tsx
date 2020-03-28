@@ -28,7 +28,7 @@ export default function Home() {
   const { data } = useQuery<{ tasks: Task[] }>(getTasks, {
     variables: {
       traits: auth?.user?.personalityTraits ?? [],
-      type: auth?.user?.type
+      types: [auth?.user?.type]
     }
   });
 
