@@ -29,7 +29,7 @@ export function sortByOrder(checkpoints: Checkpoint[]) {
 /**
  * Resolve Task Image
  */
-export function resolveTaskImage(task: Task): string {
+export function resolveTaskImage(task: { cover: string }): string {
   return (task.cover ?? "").replace(".svg", ".png");
 }
 

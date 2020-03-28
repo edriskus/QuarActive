@@ -52,6 +52,9 @@
     "didYouLike": "Ar patiko šis iššūkis?",
     "title": "Pavadinimas",
     "difficulty": "Sudėtingumas",
+    "description": "Aprašymas",
+    "cover": "Iliustracija",
+    "healthTip": "Patarimas",
     "checkpoints": "Žingsniai",
     "edit": "Keisti"
   }

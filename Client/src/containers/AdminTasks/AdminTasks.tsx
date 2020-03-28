@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import MUIDataTable, {
   MUIDataTableOptions,
   MUIDataTableColumnDef
@@ -72,11 +72,16 @@ export default function AdminTasks() {
   const { t } = useTranslation();
   const { locale } = useLocale();
   const { data } = useQuery<{ tasks: Task[] }>(getTasks, {
+    fetchPolicy: "network-only",
     variables: {
       traits,
       types
     }
   });
+
+  const tasks = data?.tasks;
+  const items = useMemo(() => [...(tasks ?? [])].reverse(), [tasks]);
+
   return (
     <Container maxWidth="lg">
       <ScrollTop />
@@ -85,10 +90,10 @@ export default function AdminTasks() {
           {t("admin.allTasks")}
         </Typography>
       </Box>
-      {!!data?.tasks ? (
+      {!!tasks ? (
         <MUIDataTable
           title={""}
-          data={data?.tasks}
+          data={items}
           columns={columns(locale, t)}
           options={options}
         />

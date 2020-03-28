@@ -24,6 +24,7 @@ export interface Task {
   cover: string;
   offline?: boolean;
   description: TranslatedString; // In markdown
+  healthTip?: TranslatedString;
   difficulty: Difficulty;
   checkpoints: Checkpoint[];
   status?: TaskStatus;

@@ -52,6 +52,9 @@
     "didYouLike": "Did you like this challenge?",
     "title": "Title",
     "difficulty": "Difficulty",
+    "description": "Description",
+    "cover": "Illustration",
+    "healthTip": "Tip",
     "checkpoints": "Checkpoints",
     "edit": "Edit"
   }

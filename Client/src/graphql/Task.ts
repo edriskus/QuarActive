@@ -33,6 +33,29 @@ export const getTasks = gql`
   }
 `;
 
+export const changeTask = gql`
+  mutation changeTask(
+    $taskId: String!
+    $title: TranslationInput!
+    $description: TranslationInput!
+    $cover: String!
+    $healthTip: TranslationInput!
+  ) {
+    changeCover(amount: $cover, taskId: $taskId) {
+      id
+    }
+    changeTitle(title: $title, taskId: $taskId) {
+      id
+    }
+    changeDescription(title: $description, taskId: $taskId) {
+      id
+    }
+    changeHealthTip(title: $healthTip, taskId: $taskId) {
+      id
+    }
+  }
+`;
+
 export const getTask = gql`
   query getTask($taskId: String!) {
     task(taskId: $taskId) {
